@@ -3,12 +3,12 @@ USE quan_ly_ban_hang;
 CREATE TABLE IF NOT EXISTS customer (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
-    age INT NOT NULL CHECK (age BETWEEN 18 AND 100)
+    age INT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS the_order (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     customer_id INT,
-    order_date DATETIME,
+    order_date DATE,
     order_total_price DOUBLE,
     FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
