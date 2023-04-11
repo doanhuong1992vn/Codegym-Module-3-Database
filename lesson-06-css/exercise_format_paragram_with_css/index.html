@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        #abc:hover {
+
+        }
+        #abc #example {
+            display: none;
+        }
         body {
             margin: 0 2% 0 2%;
         }
@@ -20,6 +26,9 @@
             color: blue;
             text-decoration: none;
         }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -28,7 +37,7 @@
 
 <p style="font-style: italic">
     Bài chi tiết:
-    <a href="https://vi.wikipedia.org/wiki/T%C3%B4n_gi%C3%A1o_t%E1%BA%A1i_Vi%E1%BB%87t_Nam" onmouseover="">
+    <a id="abc" href="https://vi.wikipedia.org/wiki/T%C3%B4n_gi%C3%A1o_t%E1%BA%A1i_Vi%E1%BB%87t_Nam">
         Tôn giáo tại Việt Nam
     </a>
     và
@@ -152,11 +161,5 @@
         đạo Hòa Hảo
     </a>.
 </p>
-<script>
-    function addUnderline() {
-        document.querySelector("a").style.text
-    }
-    document.querySelector("a").addEventListener("mouseover", addUnderline);
-</script>
 </body>
 </html>
