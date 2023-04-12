@@ -1,6 +1,6 @@
 USE QUAN_LY_BAN_HANG;
 INSERT INTO CUSTOMER (NAME, AGE) VALUES 
-("Minh Quan", 10),
+("Minh Quan", 25),
 ("Ngoc Oanh", 20),
 ("Hong Ha", 50);
 INSERT INTO THE_ORDER (CUSTOMER_ID, ORDER_DATE, ORDER_TOTAL_PRICE) VALUES
@@ -37,7 +37,7 @@ LEFT JOIN THE_ORDER AS ORD ON CUS.ID = ORD.CUSTOMER_ID
 WHERE ORD.CUSTOMER_ID IS NULL;
 
 -- Hiển thị mã hóa đơn, ngày bán và giá tiền của từng hóa đơn (giá một hóa đơn được tính bằng tổng giá bán của từng loại mặt hàng xuất hiện trong hóa đơn. Giá bán của từng loại được tính = odQTY*pPrice)
-SELECT O.ID AS "ORDER ID", O.ORDER_DATE AS "ORDER DAE", SUM(OD.QUANTITY*P.PRICE) AS "TOTAL PRICE" 
+SELECT O.ID AS "ORDER ID", O.ORDER_DATE AS "ORDER DATE", SUM(OD.QUANTITY*P.PRICE) AS "TOTAL PRICE" 
 FROM THE_ORDER AS O
 JOIN ORDER_DETAIL AS OD ON O.ID = OD.ORDER_ID
 JOIN PRODUCT AS P ON P.ID = OD.PRODUCT_ID	

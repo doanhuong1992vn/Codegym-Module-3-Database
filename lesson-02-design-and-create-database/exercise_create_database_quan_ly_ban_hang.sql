@@ -25,3 +25,9 @@ CREATE TABLE IF	NOT EXISTS order_detail (
     FOREIGN KEY (order_id) REFERENCES the_order(id),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
+
+ALTER TABLE customer
+ADD CONSTRAINT customer_chk_1 CHECK (AGE BETWEEN 18 AND 100);
+ALTER TABLE customer DROP CONSTRAINT customer_chk_1;
+INSERT INTO CUSTOMER (NAME, AGE) 
+VALUES ("Minh Nam", "15");
