@@ -31,7 +31,7 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public void insertUser(User user) throws SQLException {
+    public void insertUser(User user) {
         System.out.println(INSERT_USERS_SQL);
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
