@@ -7,9 +7,17 @@
         input {
             width: 250px;
         }
+        div {
+            align-items: center;
+            align-content: center;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+        }
     </style>
 </head>
 <body>
+<div>
 <h2>Product Discount Calculator</h2>
 <form method="get" action="${pageContext.request.contextPath}/DiscountServlet">
     <label>Product Description<br/>
@@ -23,5 +31,6 @@
     </label><br/><br/><br/>
     <input type="submit" value="Calculate Discount">
 </form>
+</div>
 </body>
 </html>
