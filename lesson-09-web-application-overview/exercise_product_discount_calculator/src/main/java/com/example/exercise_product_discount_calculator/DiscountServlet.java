@@ -1,7 +1,5 @@
 package com.example.exercise_product_discount_calculator;
 
-import utils.Converter;
-
 import java.io.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,4 +19,5 @@ public class DiscountServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("result.jsp");
         requestDispatcher.forward(request, response);
     }
+
 }

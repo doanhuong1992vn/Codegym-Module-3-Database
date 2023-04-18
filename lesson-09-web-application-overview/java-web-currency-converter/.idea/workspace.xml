@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd8795d6-bcc6-4b55-967f-bb41a1e64c50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../practice-create-website-display-system-time/src/main/java/com/example/servertime/ServerTimeServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../practice_simple_login/src/main/java/com/example/simple_login/LoginServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_product_discount_calculator/src/main/java/utils/Converter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson-11-mvc-model/practice-customer-management/src/main/java/model/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson-11-mvc-model/practice-customer-management/src/main/java/service/ICustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson-11-mvc-model/practice-customer-management/src/main/java/service/impl/CustomerServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson-11-mvc-model/practice-customer-management/src/main/webapp/customer/create.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson-11-mvc-model/practice-customer-management/src/main/webapp/customer/delete.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson-11-mvc-model/practice-customer-management/src/main/webapp/customer/edit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson-11-mvc-model/practice-customer-management/src/main/webapp/customer/list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson-11-mvc-model/practice-customer-management/src/main/webapp/customer/view.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson-11-mvc-model/practice-customer-management/src/main/webapp/error-404.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../exercise_product_discount_calculator/src/main/java/com/example/exercise_product_discount_calculator/DiscountServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../exercise_product_discount_calculator/src/main/java/com/example/exercise_product_discount_calculator/DiscountServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../exercise_product_discount_calculator/src/main/webapp/result.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../exercise_product_discount_calculator/src/main/webapp/result.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../practice_simple_dictionary/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../practice_simple_dictionary/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +59,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Codegym/Codegym-Module-3-Database/lesson-09-web-application-overview/practice_simple_dictionary",
+    "last_opened_file_path": "D:/Codegym/Codegym-Module-3-Database/lesson-09-web-application-overview/practice_java-web-currency-converter",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -155,6 +166,7 @@
       <updated>1681720169668</updated>
       <workItem from="1681720170908" duration="2152000" />
       <workItem from="1681722447030" duration="373000" />
+      <workItem from="1681811201736" duration="35000" />
     </task>
     <servers />
   </component>
