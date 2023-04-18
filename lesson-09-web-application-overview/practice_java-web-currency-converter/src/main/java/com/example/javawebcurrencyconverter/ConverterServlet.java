@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 @WebServlet(name = "ConverterServlet", value = "/convert")
-public class HelloServlet extends HttpServlet {
+public class ConverterServlet extends HttpServlet {
     private String message;
 
     public void init() {
