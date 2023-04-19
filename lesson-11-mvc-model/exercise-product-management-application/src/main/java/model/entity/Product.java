@@ -1,13 +1,24 @@
 package model.entity;
 
 public class Product {
+    private static long count = 0;
     private long id;
     private String name;
     private double price;
     private String description;
     private String producer;
+    private boolean isDeleted = false;
+
+    public Product(String name, double price, String description, String producer) {
+        this.id = ++count;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.producer = producer;
+    }
 
     public Product(long id, String name, double price, String description, String producer) {
+        ++count;
         this.id = id;
         this.name = name;
         this.price = price;
@@ -53,6 +64,14 @@ public class Product {
 
     public void setProducer(String producer) {
         this.producer = producer;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     @Override

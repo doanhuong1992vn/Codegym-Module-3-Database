@@ -70,7 +70,7 @@ public class CustomerServlet extends HttpServlet {
         }
         try {
             dispatcher.forward(request, response);
-        } catch (ServletException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

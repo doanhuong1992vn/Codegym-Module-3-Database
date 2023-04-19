@@ -20,14 +20,14 @@
 </head>
 <body>
 <h1>Product Management</h1>
-<form method="get" action="${pageContext.request.contextPath}/search?action=search&">
+<form method="get" action="${pageContext.request.contextPath}/search">
     <label>
-        <input type="text" name="search" placeholder="Search Product">
+        <input type="text" name="keyword" placeholder="Search Product">
     </label>
     <button type="submit">Search</button>
 </form>
 <button><a href="?action=create">Create new product</a></button>
-<button><a href="?action=all">Show all products</a></button>
+<button><a href="/products">Show all products</a></button>
 <br>
 <table>
     <tr>

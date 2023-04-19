@@ -23,23 +23,57 @@ public class ProductServiceImpl implements IProductService {
     }
     @Override
     public List<Product> getAll() {
-        return products;
+        List<Product> productList = new ArrayList<>();
+        for (Product product : products) {
+            if (!product.isDeleted()) {
+                productList.add(product);
+            }
+        }
+        return productList;
     }
 
     @Override
     public Product getProductById(long id) {
+        for (Product product : products) {
+            if (product.getId() == id && !product.isDeleted()) {
+                return product;
+            }
+        }
         return null;
     }
 
     @Override
     public List<Product> getProductsByKeyword(String keyword) {
+        if (keyword == null) {
+            return null;
+        }
         List<Product> productList = new ArrayList<>();
         String search = keyword.toUpperCase().trim();
         for (Product product : products) {
-            if (product.getName().toUpperCase().contains(search)) {
+            if (product.toString().toUpperCase().contains(search) && !product.isDeleted()) {
                 productList.add(product);
             }
         }
         return productList;
+    }
+
+    @Override
+    public void save(Product product) {
+        products.add(product);
+    }
+
+    @Override
+    public void editProductById(long id, String name, double price, String description, String producer) {
+        Product product = getProductById(id);
+        product.setName(name);
+        product.setDescription(description);
+        product.setPrice(price);
+        product.setProducer(producer);
+    }
+
+    @Override
+    public void deleteProductById(long id) {
+        Product product = getProductById(id);
+        product.setDeleted(true);
     }
 }
