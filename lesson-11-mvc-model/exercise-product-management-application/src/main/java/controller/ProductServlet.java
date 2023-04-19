@@ -28,17 +28,18 @@ public class ProductServlet extends HttpServlet {
         if (action == null) {
             action = "";
         }
-        String searchURL = request.getServletPath();
-        if (searchURL.equals("/search")) {
-            action = "search";
-        }
         switch (action) {
-            case "search" -> searchProduct(request, response);
             case "create" -> showCreateForm(request, response);
             case "edit" -> showEditForm(request, response);
             case "delete" -> showDeleteForm(request, response);
             case "view" -> viewProduct(request, response);
-            default -> allProducts(request, response);
+            default -> {
+                String urlPatterns = request.getServletPath();
+                if (urlPatterns.equals("/search")) {
+                    searchProduct(request, response);
+                }
+                allProducts(request, response);
+            }
         }
     }
 
