@@ -8,6 +8,25 @@ public abstract class Seat implements ISurcharge {
     private String type;
     private String code;
     private boolean isEmpty = true;
+    private long idShowtime;
+    private int capacity;
+
+    public Seat(long id, String type, String code, boolean isEmpty, long idShowtime, int capacity) {
+        this.id = id;
+        this.type = type;
+        this.code = code;
+        this.isEmpty = isEmpty;
+        this.idShowtime = idShowtime;
+        this.capacity = capacity;
+    }
+
+    public Seat(String type, String code, boolean isEmpty, long idShowtime, int capacity) {
+        this.type = type;
+        this.code = code;
+        this.isEmpty = isEmpty;
+        this.idShowtime = idShowtime;
+        this.capacity = capacity;
+    }
 
     public long getId() {
         return id;
@@ -49,21 +68,12 @@ public abstract class Seat implements ISurcharge {
         this.idShowtime = idShowtime;
     }
 
-    private long idShowtime;
-
-    public Seat(String type, String code, boolean isEmpty, long idShowtime) {
-        this.type = type;
-        this.code = code;
-        this.isEmpty = isEmpty;
-        this.idShowtime = idShowtime;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public Seat(long id, String type, String code, boolean isEmpty, long idShowtime) {
-        this.id = id;
-        this.type = type;
-        this.code = code;
-        this.isEmpty = isEmpty;
-        this.idShowtime = idShowtime;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     @Override

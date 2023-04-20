@@ -1,6 +1,7 @@
 package model.dao;
 
-import case_study_Enjoy_Galaxy.model.entity.Showtime;
+
+import model.entity.Showtime;
 
 import java.util.List;
 

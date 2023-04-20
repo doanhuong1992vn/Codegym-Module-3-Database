@@ -1,8 +1,10 @@
 package model.dao.iplm;
 
-import case_study_Enjoy_Galaxy.model.dao.ISeatDAO;
-import case_study_Enjoy_Galaxy.model.entity.seat.abstraction.Seat;
-import case_study_Enjoy_Galaxy.model.factory.SeatFactory;
+
+
+import model.dao.ISeatDAO;
+import model.entity.seat.Seat;
+import model.factory.SeatFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

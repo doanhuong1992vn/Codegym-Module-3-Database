@@ -1,6 +1,7 @@
 package model.builder.ticket_builder;
 
-import case_study_Enjoy_Galaxy.model.entity.Ticket;
+
+import model.entity.Ticket;
 
 import java.util.Date;
 

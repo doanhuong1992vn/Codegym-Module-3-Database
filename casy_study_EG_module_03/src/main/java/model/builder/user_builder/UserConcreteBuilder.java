@@ -1,9 +1,9 @@
 package model.builder.user_builder;
 
-import case_study_Enjoy_Galaxy.model.entity.users.Admin;
-import case_study_Enjoy_Galaxy.model.entity.users.Customer;
-import case_study_Enjoy_Galaxy.model.entity.users.Staff;
-import case_study_Enjoy_Galaxy.model.entity.users.abstraction.User;
+import model.entity.users.User;
+import model.entity.users.extend.Admin;
+import model.entity.users.extend.Customer;
+import model.entity.users.extend.Staff;
 
 import java.util.Date;
 

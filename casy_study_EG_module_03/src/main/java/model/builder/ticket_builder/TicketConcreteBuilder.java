@@ -1,6 +1,7 @@
 package model.builder.ticket_builder;
 
-import case_study_Enjoy_Galaxy.model.entity.Ticket;
+
+import model.entity.Ticket;
 
 import java.util.Date;
 
@@ -120,21 +121,6 @@ public class TicketConcreteBuilder implements ITicketBuilder {
 
     @Override
     public Ticket build() {
-        return new Ticket(id,
-                idUser,
-                userName,
-                idMovieTheater,
-                movieTheaterName,
-                movieTheaterAddress,
-                idCinema,
-                cinemaName,
-                movieName,
-                movieDuration,
-                idSeat,
-                seatCode,
-                showtime,
-                endTime,
-                personNumber,
-                price);
+        return null;
     }
 }

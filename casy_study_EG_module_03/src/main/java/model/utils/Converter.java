@@ -1,8 +1,8 @@
 package model.utils;
 
-import case_study_Enjoy_Galaxy.model.entity.Movie;
-import case_study_Enjoy_Galaxy.model.entity.cinema.abstraction.Room;
-import case_study_Enjoy_Galaxy.model.entity.movie_theater.abstraction.MovieTheater;
+import model.entity.Movie;
+import model.entity.cinema.Cinema;
+import model.entity.room.Room;
 
 import java.text.Normalizer;
 import java.text.NumberFormat;
@@ -67,7 +67,7 @@ public class Converter {
 
     public static Date getEndTimeBeforeCleaningTimeByShowtimeWithMovie(Date showtime, Movie movie) {
         long timeOfShowtime = showtime.getTime();
-        long timeOfMovieDuration = movie.getMovieDuration() * 60 * 1000L;
+        long timeOfMovieDuration = movie.getDuration() * 60 * 1000L;
         long timeOfEndTime = timeOfShowtime + timeOfMovieDuration;
         return new Date(timeOfEndTime);
     }
@@ -92,11 +92,11 @@ public class Converter {
         return new Date(timeOfDate + timeOf7Days);
     }
 
-    public static String convertToRecordOfShowtime(MovieTheater movieTheater, Room room, Date showtime, Movie movie) {
+    public static String convertToRecordOfShowtime(Cinema cinema, Room room, Date showtime, Movie movie) {
         StringBuilder record = new StringBuilder();
         String showtimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(showtime);
         record.append("\n")
-                .append(movieTheater.getId())
+                .append(cinema.getId())
                 .append(";")
                 .append(room.getId())
                 .append(";")

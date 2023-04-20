@@ -1,21 +1,17 @@
 package model.builder.showtime_builder;
 
-import case_study_Enjoy_Galaxy.model.entity.Movie;
-import case_study_Enjoy_Galaxy.model.entity.Showtime;
-import case_study_Enjoy_Galaxy.model.entity.seat.abstraction.Seat;
+
+import model.entity.Movie;
+import model.entity.Showtime;
 
 import java.util.Date;
 
 public class ShowtimeConcreteBuilder implements IShowtimeBuilder {
     private long id;
-    private long idMovieTheater;
     private long idRoom;
-    private String nameMovieTheater;
-    private String addressMovieTheater;
-    private String nameRoom;
     private Date startTime;
     private Date endTime;
-    private Movie movie;
+    private long idMovie;
     private double price;
 
     @Override
@@ -25,32 +21,8 @@ public class ShowtimeConcreteBuilder implements IShowtimeBuilder {
     }
 
     @Override
-    public IShowtimeBuilder idMovieTheater(long idMovieTheater) {
-        this.idMovieTheater = idMovieTheater;
-        return this;
-    }
-
-    @Override
     public IShowtimeBuilder idRoom(long idRoom) {
         this.idRoom = idRoom;
-        return this;
-    }
-
-    @Override
-    public IShowtimeBuilder nameMovieTheater(String nameMovieTheater) {
-        this.nameMovieTheater = nameMovieTheater;
-        return this;
-    }
-
-    @Override
-    public IShowtimeBuilder addressMovieTheater(String addressMovieTheater) {
-        this.addressMovieTheater = addressMovieTheater;
-        return this;
-    }
-
-    @Override
-    public IShowtimeBuilder nameRoom(String nameRoom) {
-        this.nameRoom = nameRoom;
         return this;
     }
 
@@ -67,8 +39,8 @@ public class ShowtimeConcreteBuilder implements IShowtimeBuilder {
     }
 
     @Override
-    public IShowtimeBuilder movie(Movie movie) {
-        this.movie = movie;
+    public IShowtimeBuilder idMovie(long idMovie) {
+        this.idMovie = idMovie;
         return this;
     }
 
@@ -79,17 +51,13 @@ public class ShowtimeConcreteBuilder implements IShowtimeBuilder {
     }
 
     @Override
-    public Showtime build() {
-        return new Showtime(
-                id,
-                idMovieTheater,
-                idRoom,
-                nameMovieTheater,
-                addressMovieTheater,
-                nameRoom,
-                startTime,
-                endTime,
-                movie,
-                price);
+    public Showtime build(String type) {
+        if (type.equalsIgnoreCase("full")) {
+            return new Showtime(id, startTime, endTime, idRoom, idMovie);
+        } else if (type.equalsIgnoreCase("demo")) {
+            return new Showtime(startTime, endTime, idRoom, idMovie);
+        }
+        return null;
     }
+
 }

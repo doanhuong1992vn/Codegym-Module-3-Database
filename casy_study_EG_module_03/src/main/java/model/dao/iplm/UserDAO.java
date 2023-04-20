@@ -1,9 +1,9 @@
 package model.dao.iplm;
 
-import case_study_Enjoy_Galaxy.model.builder.user_builder.IUserBuilder;
-import case_study_Enjoy_Galaxy.model.builder.user_builder.UserConcreteBuilder;
-import case_study_Enjoy_Galaxy.model.dao.IUserDAO;
-import case_study_Enjoy_Galaxy.model.entity.users.abstraction.User;
+import model.builder.user_builder.IUserBuilder;
+import model.builder.user_builder.UserConcreteBuilder;
+import model.dao.IUserDAO;
+import model.entity.users.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,18 +13,15 @@ import java.util.Date;
 import java.util.List;
 
 public class UserDAO implements IUserDAO {
-    private static final UserDAO userDAO = new UserDAO();
     private static final String INSERT_USER = "INSERT INTO USER (TYPE, FULLNAME, PHONE_NUMBER, EMAIL, PASSWORD) VALUES (?,?,?,?,?);";
     private static final String SELECT_ALL = "SELECT * FROM USER;";
 
-    private UserDAO() {
-    }
-    public static UserDAO getInstance() {
-        return userDAO;
+    public static IUserDAO getInstance() {
+        return new UserDAO();
     }
 
     @Override
-    public void insertUser(User user) {
+    public void insert(User user) {
         try (Connection connection = ConnectionDAO.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER)) {
             preparedStatement.setString(1, user.getType());

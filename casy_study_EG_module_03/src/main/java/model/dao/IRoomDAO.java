@@ -1,6 +1,7 @@
 package model.dao;
 
-import case_study_Enjoy_Galaxy.model.entity.cinema.abstraction.Room;
+
+import model.entity.room.Room;
 
 import java.util.List;
 

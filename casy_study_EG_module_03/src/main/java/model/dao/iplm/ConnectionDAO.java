@@ -1,6 +1,7 @@
 package model.dao.iplm;
 
-import case_study_Enjoy_Galaxy.model.dao.IConnectionDAO;
+
+import model.dao.IConnectionDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

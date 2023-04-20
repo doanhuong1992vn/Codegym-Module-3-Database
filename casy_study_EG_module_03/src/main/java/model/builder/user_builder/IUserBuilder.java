@@ -1,6 +1,7 @@
 package model.builder.user_builder;
 
-import case_study_Enjoy_Galaxy.model.entity.users.abstraction.User;
+
+import model.entity.users.User;
 
 import java.text.ParseException;
 import java.util.Date;

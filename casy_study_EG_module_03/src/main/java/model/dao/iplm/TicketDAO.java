@@ -1,7 +1,7 @@
 package model.dao.iplm;
 
-import case_study_Enjoy_Galaxy.model.dao.ITicketDAO;
-import case_study_Enjoy_Galaxy.model.entity.Ticket;
+import model.dao.ITicketDAO;
+import model.entity.Ticket;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

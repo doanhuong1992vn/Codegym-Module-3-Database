@@ -1,10 +1,11 @@
 package model.dao;
 
-import case_study_Enjoy_Galaxy.model.entity.users.abstraction.User;
+
+import model.entity.users.User;
 
 import java.util.List;
 
 public interface IUserDAO {
-    void insertUser(User user);
+    void insert(User user);
     List<User> getAll();
 }

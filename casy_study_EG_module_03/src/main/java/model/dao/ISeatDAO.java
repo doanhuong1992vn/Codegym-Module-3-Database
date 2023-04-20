@@ -1,6 +1,7 @@
 package model.dao;
 
-import case_study_Enjoy_Galaxy.model.entity.seat.abstraction.Seat;
+
+import model.entity.seat.Seat;
 
 import java.util.List;
 

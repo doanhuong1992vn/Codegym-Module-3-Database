@@ -1,8 +1,9 @@
 package model.dao.iplm;
 
-import case_study_Enjoy_Galaxy.model.dao.IRoomDAO;
-import case_study_Enjoy_Galaxy.model.entity.cinema.abstraction.Room;
-import case_study_Enjoy_Galaxy.model.factory.RoomFactory;
+
+import model.dao.IRoomDAO;
+import model.entity.room.Room;
+import model.factory.RoomFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

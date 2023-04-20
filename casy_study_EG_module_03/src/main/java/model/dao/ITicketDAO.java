@@ -1,6 +1,7 @@
 package model.dao;
 
-import case_study_Enjoy_Galaxy.model.entity.Ticket;
+
+import model.entity.Ticket;
 
 import java.util.List;
 

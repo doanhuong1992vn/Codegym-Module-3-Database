@@ -1,7 +1,7 @@
 package model.dao.iplm;
 
-import case_study_Enjoy_Galaxy.model.dao.IShowtimeDAO;
-import case_study_Enjoy_Galaxy.model.entity.Showtime;
+import model.dao.IShowtimeDAO;
+import model.entity.Showtime;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +27,7 @@ public class ShowtimeDAO implements IShowtimeDAO {
         try (Connection connection = ConnectionDAO.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SHOWTIME)) {
             preparedStatement.setLong(1, showtime.getId());
-            preparedStatement.setTimestamp(1, new java.sql.Timestamp(showtime.getShowtime().getTime()));
+            preparedStatement.setTimestamp(1, new java.sql.Timestamp(showtime.getStartTime().getTime()));
             preparedStatement.setTimestamp(2, new java.sql.Timestamp(showtime.getEndTime().getTime()));
             preparedStatement.setLong(3, showtime.getIdRoom());
             preparedStatement.setLong(4, showtime.getIdMovie());

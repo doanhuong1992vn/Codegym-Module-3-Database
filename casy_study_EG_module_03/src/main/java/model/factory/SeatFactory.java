@@ -1,10 +1,11 @@
 package model.factory;
 
-import case_study_Enjoy_Galaxy.model.entity.seat.abstraction.Seat;
-import case_study_Enjoy_Galaxy.model.entity.seat.DeluxeSeat;
-import case_study_Enjoy_Galaxy.model.entity.seat.StandardSeat;
-import case_study_Enjoy_Galaxy.model.entity.seat.SweetBox;
-import case_study_Enjoy_Galaxy.model.entity.seat.VipSeat;
+
+import model.entity.seat.Seat;
+import model.entity.seat.extend.DeluxeSeat;
+import model.entity.seat.extend.StandardSeat;
+import model.entity.seat.extend.SweetBox;
+import model.entity.seat.extend.VipSeat;
 
 public class SeatFactory {
     private static final String[] alphabet =
@@ -15,23 +16,7 @@ public class SeatFactory {
     public static SeatFactory getInstance() {
         return seatFactory;
     }
-    public Seat getSeat(String typeSeat, String seatCode) {
-        String typeSeatToUpperCase = typeSeat.toUpperCase();
-        switch (typeSeatToUpperCase) {
-            case "SWEETBOX" -> {
-                return new SweetBox(seatCode);
-            }
-            case "DELUXESEAT" -> {
-                return new DeluxeSeat(seatCode);
-            }
-            case "VIPSEAT" -> {
-                return new VipSeat(seatCode);
-            }
-            default -> {
-                return new StandardSeat(seatCode);
-            }
-        }
-    }
+
     public Seat getSeat(long id, String type, String code, boolean ready, long idShowtime) {
         String typeUP = type.toUpperCase();
         switch (typeUP) {
@@ -49,20 +34,20 @@ public class SeatFactory {
             }
         }
     }
-    public Seat getSeat(String type, String code, boolean ready, long idShowtime) {
+    public Seat getSeat(String type, String code, boolean isEmpty, long idShowtime) {
         String typeUP = type.toUpperCase();
         switch (typeUP) {
             case "SWEETBOX" -> {
-                return new SweetBox(type, idShowtime, code, ready);
+                return new SweetBox(type, code, isEmpty, idShowtime);
             }
             case "DELUXESEAT" -> {
-                return new DeluxeSeat(type, idShowtime, code, ready);
+                return new DeluxeSeat(type, code, isEmpty, idShowtime);
             }
             case "VIPSEAT" -> {
-                return new VipSeat(type, idShowtime, code, ready);
+                return new VipSeat(type, code, isEmpty, idShowtime);
             }
             default -> {
-                return new StandardSeat(type, idShowtime, code, ready);
+                return new StandardSeat(type, code, isEmpty, idShowtime);
             }
         }
     }

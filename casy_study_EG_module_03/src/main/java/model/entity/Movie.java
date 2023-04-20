@@ -14,6 +14,49 @@ public class Movie {
     private int duration;
     private String language;
     private String content;
+    private String urlImage;
+
+    public Movie(String name,
+                 String director,
+                 String actors,
+                 String genre,
+                 Date premiereDate,
+                 int duration,
+                 String language,
+                 String content,
+                 String urlImage) {
+        this.name = name;
+        this.director = director;
+        this.actors = actors;
+        this.genre = genre;
+        this.premiereDate = premiereDate;
+        this.duration = duration;
+        this.language = language;
+        this.content = content;
+        this.urlImage = urlImage;
+    }
+
+    public Movie(long id,
+                 String name,
+                 String director,
+                 String actors,
+                 String genre,
+                 Date premiereDate,
+                 int duration,
+                 String language,
+                 String content,
+                 String urlImage) {
+        this.id = id;
+        this.name = name;
+        this.director = director;
+        this.actors = actors;
+        this.genre = genre;
+        this.premiereDate = premiereDate;
+        this.duration = duration;
+        this.language = language;
+        this.content = content;
+        this.urlImage = urlImage;
+    }
 
     public long getId() {
         return id;
@@ -87,26 +130,11 @@ public class Movie {
         this.content = content;
     }
 
-    public Movie(String name, String director, String actors, String genre, Date premiereDate, int duration, String language, String content) {
-        this.name = name;
-        this.director = director;
-        this.actors = actors;
-        this.genre = genre;
-        this.premiereDate = premiereDate;
-        this.duration = duration;
-        this.language = language;
-        this.content = content;
+    public String getUrlImage() {
+        return urlImage;
     }
 
-    public Movie(long id, String name, String director, String actors, String genre, Date premiereDate, int duration, String language, String content) {
-        this.id = id;
-        this.name = name;
-        this.director = director;
-        this.actors = actors;
-        this.genre = genre;
-        this.premiereDate = premiereDate;
-        this.duration = duration;
-        this.language = language;
-        this.content = content;
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }
