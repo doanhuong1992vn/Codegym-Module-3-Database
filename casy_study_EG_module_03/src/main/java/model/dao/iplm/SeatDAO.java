@@ -31,7 +31,7 @@ public class SeatDAO implements ISeatDAO {
                 long id = resultSet.getLong("ID");
                 String type = resultSet.getString("TYPE");
                 String code = resultSet.getString("CODE");
-                boolean ready = resultSet.getBoolean("READY");
+                boolean ready = resultSet.getBoolean("IS_EMPTY");
                 Seat seat = SeatFactory.getInstance().getSeat(id, type, code, ready, idShowtime);
                 seats.add(seat);
             }

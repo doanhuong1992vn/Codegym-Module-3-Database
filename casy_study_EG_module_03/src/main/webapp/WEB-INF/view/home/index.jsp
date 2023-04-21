@@ -11,17 +11,15 @@
 <body>
 <form action="/movie" method="get">
     <c:forEach items='${requestScope.get("movies")}' var="movie">
-        <div class="card" style="width: 20rem;">
-            <button type="submit" name="idMovie" value="${movie.getId()}">
-                <img src="${movie.getUrlImage()}" class="card-img-top" alt='${movie.getName()}'>
+        <div class="card" style="width: 20rem; float: left; height: 650px; margin: 1rem">
+            <button type="submit" class="btn btn-outline-dark"  name="idMovie" value="${movie.getId()}" style="height: 455px; width: 20rem">
+                <img src="${movie.getUrlImage()}" class="card-img-top" alt='${movie.getName()}' style="height: 445px; width: 18rem">
             </button>
             <div class="card-body">
                 <h5 class="card-title">${movie.getName()}</h5>
                 <p class="card-text">
                     Ngày khởi chiếu: <fmt:formatDate value="${movie.getPremiereDate()}"></fmt:formatDate>
                 </p>
-<%--                <a href="${pageContext.request.contextPath}/movie?id=${movie.getId()}" class="btn btn-primary">Mua--%>
-<%--                    vé</a>--%>
                 <button type="submit" class="btn btn-outline-primary" name="idMovie" value="${movie.getId()}">
                     Mua vé
                 </button>

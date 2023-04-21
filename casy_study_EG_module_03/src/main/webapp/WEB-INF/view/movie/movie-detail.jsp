@@ -9,10 +9,11 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<div class="card mb-3" style="max-width: 860px;">
+<div class="card mb-3" style="max-width: 75%; left: 50%; transform: translate(-50%)">
     <div class="row g-0">
         <div class="col-md-4">
-            <img src="${movie.getUrlImage()}" class="img-fluid rounded-start" alt="${movie.getName()}">
+            <img style="margin-top: 100px; width: 25rem;" src="${movie.getUrlImage()}" class="img-fluid rounded-start"
+                 alt="${movie.getName()}">
         </div>
         <div class="col-md-8">
             <div class="card-body">
@@ -44,7 +45,13 @@
         <c:forEach items='${requestScope.get("mapShowtime")}' var="entry">
             <li class="list-group-item active">Rạp ${entry.getKey()}</li>
             <c:forEach items='${entry.getValue()}' var="showtime">
-                <li class="list-group-item">${showtime.getStartTime()}</li>
+                <button type="button" class="btn btn-outline-info">
+                    <a href="<c:url value="/booking?idShowtime=${showtime.getId()}"/>">
+                        <li class="list-group-item" style="color: #17a2b8">
+                                ${showtime.getStartTime()}
+                        </li>
+                    </a>
+                </button>
             </c:forEach>
         </c:forEach>
     </ul>

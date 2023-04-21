@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.util.*;
 
 public class ShowtimeDAO implements IShowtimeDAO {
-    private static final String SELECT_ALL = "SELECT * FROM SHOWTIME;";
+//    private static final String SELECT_ALL = "SELECT * FROM SHOWTIME;";
     private static final String SELECT_BY_ID_MOVIE = "SELECT * FROM SHOWTIME WHERE ID_MOVIE = ?";
     private static final String SELECT_BY_ID_ROOM = "SELECT * FROM SHOWTIME WHERE ID_ROOM = ?";
     private static final String INSERT_SHOWTIME = "INSERT INTO SHOWTIME(START_TIME, END_TIME, ID_ROOM, ID_MOVIE) VALUES (?,?,?,?);";

@@ -7,7 +7,7 @@ import model.service.IMovieService;
 import java.util.List;
 
 public class MovieServiceImpl implements IMovieService {
-    public static IMovieService getInstance(){
+    public static IMovieService getMovieService(){
         return new MovieServiceImpl();
     }
     @Override
