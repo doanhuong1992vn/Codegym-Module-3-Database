@@ -147,12 +147,24 @@ ADD CONSTRAINT `FK_CINEMA`
   ALTER TABLE `enjoy_galaxy`.`seat` 
 ADD COLUMN `CAPACITY` INT NOT NULL DEFAULT 1 AFTER `ID_SHOWTIME`;
 ALTER TABLE SEAT CHANGE COLUMN `ISEMPTY` `IS_EMPTY` BIT(1) NULL DEFAULT b'1' ;
-ALTER TABLE MOVIE ADD COLUMN IMAGE VARCHAR(500) UNIQUE;
-UPDATE MOVIE SET IMAGE = "https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/1.jpg?alt=media&token=fbbed138-34ca-49d2-87f1-42581be57609"
+ALTER TABLE MOVIE ADD COLUMN URL_IMAGE VARCHAR(500) UNIQUE;
+UPDATE MOVIE SET URL_IMAGE = "https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/1.jpg?alt=media&token=fbbed138-34ca-49d2-87f1-42581be57609"
 WHERE ID = 1;
-UPDATE MOVIE SET IMAGE = "https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/2.jpg?alt=media&token=c02fa731-b3f0-4128-a1f6-a3f537c95508"
+UPDATE MOVIE SET URL_IMAGE = "https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/2.jpg?alt=media&token=c02fa731-b3f0-4128-a1f6-a3f537c95508"
 WHERE ID = 2;
-UPDATE MOVIE SET IMAGE = "https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/3.jpg?alt=media&token=0f0dc405-b240-4f94-b4ca-8647010c9839"
+UPDATE MOVIE SET URL_IMAGE = "https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/3.jpg?alt=media&token=0f0dc405-b240-4f94-b4ca-8647010c9839"
 WHERE ID = 3;
 ALTER TABLE `enjoy_galaxy`.`movie` 
 CHANGE COLUMN `IMAGE` `URL_IMAGE` VARCHAR(500) UNIQUE ;
+DELIMITER //
+CREATE PROCEDURE GET_MAP_SHOWTIME(IN ID_MOVIE BIGINT)
+	BEGIN
+		SELECT CINEMA.ID AS ID_CINEMA, CINEMA.TYPE AS TYPE_CINEMA,  CINEMA.NAME AS NAME, CINEMA.ADDRESS AS ADDRESS, SHOWTIME.ID AS ID_SHOWTIME, SHOWTIME.START_TIME AS START_TIME, SHOWTIME.END_TIME AS END_TIME, SHOWTIME.ID_ROOM AS ID_ROOM, SHOWTIME.ID_MOVIE AS ID_MOVIE
+			FROM SHOWTIME
+			JOIN ROOM ON SHOWTIME.ID_ROOM = ROOM.ID
+			JOIN CINEMA ON ROOM.ID_CINEMA = CINEMA.ID
+			WHERE SHOWTIME.ID_MOVIE = ID_MOVIE;
+	END //
+    DELIMITER ;
+CALL GET_MAP_SHOWTIME(2);
+-- https://console.firebase.google.com/u/0/project/module-3-daf70/storage/module-3-daf70.appspot.com/files			: link hình ảnh movie

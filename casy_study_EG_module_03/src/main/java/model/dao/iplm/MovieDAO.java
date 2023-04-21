@@ -94,7 +94,9 @@ public class MovieDAO implements IMovieDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return getMovie(resultSet);
+            while (resultSet.next()) {
+                return getMovie(resultSet);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

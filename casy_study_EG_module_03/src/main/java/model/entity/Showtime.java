@@ -21,6 +21,9 @@ public class Showtime {
     public Date getStartTime() {
         return startTime;
     }
+    public long getTimeOfStartTime() {
+        return startTime.getTime();
+    }
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;

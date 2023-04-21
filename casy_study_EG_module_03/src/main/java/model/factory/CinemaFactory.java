@@ -12,7 +12,7 @@ public class CinemaFactory {
         return CINEMA_FACTORY;
     }
 
-    public Cinema getMovieTheater(long id, String type, String name, String address) {
+    public Cinema getCinema(long id, String type, String name, String address) {
         if (type.equalsIgnoreCase("STANDARD")) {
             return new StandardCinema(id, type, name, address);
         }

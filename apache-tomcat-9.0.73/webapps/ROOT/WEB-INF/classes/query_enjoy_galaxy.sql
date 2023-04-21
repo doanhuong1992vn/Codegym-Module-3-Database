@@ -138,3 +138,21 @@ ALTER TABLE `enjoy_galaxy`.`room`
 ADD CONSTRAINT `FK_CINEMA`
   FOREIGN KEY (`ID_CINEMA`)
   REFERENCES CINEMA (`ID`);
+  ALTER TABLE `enjoy_galaxy`.`room` 
+DROP FOREIGN KEY `room_ibfk_1`;
+ALTER TABLE `enjoy_galaxy`.`room` 
+ADD CONSTRAINT `FK_CINEMA`
+  FOREIGN KEY (`ID_MOVIE_THEATER`)
+  REFERENCES `enjoy_galaxy`.`movie_theater` (`ID`);
+  ALTER TABLE `enjoy_galaxy`.`seat` 
+ADD COLUMN `CAPACITY` INT NOT NULL DEFAULT 1 AFTER `ID_SHOWTIME`;
+ALTER TABLE SEAT CHANGE COLUMN `ISEMPTY` `IS_EMPTY` BIT(1) NULL DEFAULT b'1' ;
+ALTER TABLE MOVIE ADD COLUMN IMAGE VARCHAR(500) UNIQUE;
+UPDATE MOVIE SET IMAGE = "https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/1.jpg?alt=media&token=fbbed138-34ca-49d2-87f1-42581be57609"
+WHERE ID = 1;
+UPDATE MOVIE SET IMAGE = "https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/2.jpg?alt=media&token=c02fa731-b3f0-4128-a1f6-a3f537c95508"
+WHERE ID = 2;
+UPDATE MOVIE SET IMAGE = "https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/3.jpg?alt=media&token=0f0dc405-b240-4f94-b4ca-8647010c9839"
+WHERE ID = 3;
+ALTER TABLE `enjoy_galaxy`.`movie` 
+CHANGE COLUMN `IMAGE` `URL_IMAGE` VARCHAR(500) UNIQUE ;

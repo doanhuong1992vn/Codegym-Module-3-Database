@@ -13,12 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CinemaDAO implements ICinemaDAO {
-    private static final CinemaDAO movieTheaterDAO = new CinemaDAO();
     private static final String INSERT_MOVIE_THEATER = "INSERT INTO MOVIE_THEATER (TYPE, NAME, ADDRESS) VALUES (?,?,?);";
     private static final String SELECT_ALL = "SELECT * FROM MOVIE_THEATER;";
-    private CinemaDAO() {}
-    public static CinemaDAO getInstance() {
-        return movieTheaterDAO;
+    public static ICinemaDAO getInstance() {
+        return new CinemaDAO();
     }
     @Override
     public void insertMovieTheater(Cinema cinema) {
@@ -44,7 +42,7 @@ public class CinemaDAO implements ICinemaDAO {
                 String type = resultSet.getString("type");
                 String name = resultSet.getString("name");
                 String address = resultSet.getString("address");
-                Cinema cinema = CinemaFactory.getInstance().getMovieTheater(id, type, name, address);
+                Cinema cinema = CinemaFactory.getInstance().getCinema(id, type, name, address);
                 cinemaList.add(cinema);
             }
         } catch (Exception e) {

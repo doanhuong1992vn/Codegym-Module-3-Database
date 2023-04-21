@@ -11,11 +11,11 @@
 <body>
 <c:forEach items='${requestScope.get("movies")}' var="movie">
     <div class="card" style="width: 20rem;">
-        <img src="${movie.getUrlImage()}" class="card-img-top" alt='${movie.getName()}'>
+        <a href="${pageContext.request.contextPath}/booking?idMovie=${movie.getId()}"><img src="${movie.getUrlImage()}" class="card-img-top" alt='${movie.getName()}'></a>
         <div class="card-body">
             <h5 class="card-title">${movie.getName()}</h5>
             <p class="card-text"><fmt:formatDate value="${movie.getPremiereDate()}"></fmt:formatDate></p>
-            <a href="#" class="btn btn-primary">Mua vé</a>
+            <a href="${pageContext.request.contextPath}/booking?idMovie=${movie.getId()}" class="btn btn-primary">Mua vé</a>
         </div>
     </div>
 </c:forEach>

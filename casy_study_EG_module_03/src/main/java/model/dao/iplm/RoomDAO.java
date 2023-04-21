@@ -16,6 +16,8 @@ public class RoomDAO implements IRoomDAO {
     private static final String SELECT_BY_ID_MOVIE_THEATER = "SELECT * FROM ROOM WHERE ID_MOVIE_THEATER = ?;";
 
     private static final IRoomDAO roomDAO = new RoomDAO();
+    private static final String SELECT_BY_ID = "SELECT * FROM ";
+
     private RoomDAO() {}
     public static IRoomDAO getRoomDAO() {
         return roomDAO;
@@ -66,4 +68,5 @@ public class RoomDAO implements IRoomDAO {
         }
         return rooms;
     }
+
 }
