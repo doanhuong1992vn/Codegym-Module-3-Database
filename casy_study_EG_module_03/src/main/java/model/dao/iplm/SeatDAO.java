@@ -3,7 +3,7 @@ package model.dao.iplm;
 
 
 import model.dao.ISeatDAO;
-import model.entity.seat.Seat;
+import model.domain.seat.Seat;
 import model.factory.SeatFactory;
 
 import java.sql.Connection;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SeatDAO implements ISeatDAO {
     private static final String SELECT_SEATS_BY_ID_SHOWTIME = "SELECT * FROM SEAT WHERE ID_SHOWTIME = ?;";
-    private static final String INSERT_SEAT = "INSERT INTO SEAT(TYPE, CODE, READY, ID_SHOWTIME) VALUES (?,?,?,?);";
+    private static final String INSERT_SEAT = "INSERT INTO SEAT(TYPE, CODE, IS_EMPTY, ID_SHOWTIME) VALUES (?,?,?,?);";
     private static final ISeatDAO seatDAO = new SeatDAO();
     private SeatDAO(){}
     public static ISeatDAO getSeatDAO() {

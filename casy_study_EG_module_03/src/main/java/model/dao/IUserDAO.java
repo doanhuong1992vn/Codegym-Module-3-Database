@@ -1,11 +1,12 @@
 package model.dao;
 
 
-import model.entity.users.User;
+import model.domain.users.User;
 
 import java.util.List;
 
 public interface IUserDAO {
-    void insert(User user);
+    boolean insert(User user);
     List<User> getAll();
+    User getUserLogged(String loginName, String password);
 }

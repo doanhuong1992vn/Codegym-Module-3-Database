@@ -1,26 +1,20 @@
 package model.builder.ticket_builder;
 
 
-import model.entity.Ticket;
+import model.domain.Ticket;
 
 import java.util.Date;
 
 public interface ITicketBuilder {
     ITicketBuilder id(long id);
+    ITicketBuilder price(double price);
     ITicketBuilder idUser(long idUser);
     ITicketBuilder idSeat(long idSeat);
-    ITicketBuilder seatCode(String seatCode);
-    ITicketBuilder capacity(int personNumber);
-    ITicketBuilder price(double price);
-    ITicketBuilder username(String userName);
-    ITicketBuilder idMovieTheater(long idMovieTheater);
-    ITicketBuilder nameOfMovieTheater(String nameOfMovieTheater);
-    ITicketBuilder addressOfMovieTheater(String addressOfMovieTheater);
-    ITicketBuilder idRoom(long idRoom);
-    ITicketBuilder nameRoom(String nameRoom);
-    ITicketBuilder nameMovie(String movieName);
-    ITicketBuilder movieDuration(int movieDuration);
-    ITicketBuilder startTime(Date startTime);
-    ITicketBuilder endTime(Date endTime);
+    ITicketBuilder timeBooking(Date timeBooking);
+    ITicketBuilder isPaid(boolean isPaid);
+    ITicketBuilder timePayment(Date timePayment);
+    ITicketBuilder isChecked(boolean isChecked);
+
     Ticket build();
+    Ticket buildInsert();
 }

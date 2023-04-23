@@ -4,7 +4,7 @@ package model.dao.iplm;
 import model.builder.movie_builder.IMovieBuilder;
 import model.builder.movie_builder.MovieConcreteBuilder;
 import model.dao.IMovieDAO;
-import model.entity.Movie;
+import model.domain.Movie;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -94,7 +94,7 @@ public class MovieDAO implements IMovieDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 return getMovie(resultSet);
             }
         } catch (Exception e) {

@@ -1,11 +1,11 @@
 package model.factory;
 
 
-import model.entity.room.Room;
-import model.entity.room.extend.Room2D;
-import model.entity.room.extend.Room3D;
-import model.entity.room.extend.Room4DX;
-import model.entity.room.extend.RoomIMAX;
+import model.domain.room.Room;
+import model.domain.room.extend.Room2D;
+import model.domain.room.extend.Room3D;
+import model.domain.room.extend.Room4DX;
+import model.domain.room.extend.RoomIMAX;
 
 public class RoomFactory {
     private static final RoomFactory roomFactory = new RoomFactory();

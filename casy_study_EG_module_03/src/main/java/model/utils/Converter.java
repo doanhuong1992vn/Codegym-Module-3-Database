@@ -1,8 +1,8 @@
 package model.utils;
 
-import model.entity.Movie;
-import model.entity.cinema.Cinema;
-import model.entity.room.Room;
+import model.domain.Movie;
+import model.domain.cinema.Cinema;
+import model.domain.room.Room;
 
 import java.text.Normalizer;
 import java.text.NumberFormat;
@@ -65,25 +65,25 @@ public class Converter {
         return new Date(timeOfNextDay);
     }
 
-    public static Date getEndTimeBeforeCleaningTimeByShowtimeWithMovie(Date showtime, Movie movie) {
-        long timeOfShowtime = showtime.getTime();
+    public static Date getEndTimeBeforeCleaningTimeByShowtimeWithMovie(Date startTime, Movie movie) {
+        long timeOfStartTime = startTime.getTime();
         long timeOfMovieDuration = movie.getDuration() * 60 * 1000L;
-        long timeOfEndTime = timeOfShowtime + timeOfMovieDuration;
+        long timeOfEndTime = timeOfStartTime + timeOfMovieDuration;
         return new Date(timeOfEndTime);
     }
 
-    public static Date getEndTimeAfterCleaningTime(Date endTime) {
+    public static Date getDateAfterCleaningTime(Date endTime) {
         final long TIME_DELAY = 30 * 60 * 1000;
         long timeEnd = endTime.getTime();
         long time = timeEnd + TIME_DELAY;
         return new Date(time);
     }
 
-    public static Date convertTo8hAmOfDate(Date date) throws ParseException {
+    public static Date convertTo8h20AmOfDate(Date date) throws ParseException {
         Date beginningOfDate = Converter.convertToBeginningOfDate(date);
         long timeOfBeginningOfDate = beginningOfDate.getTime();
-        long timeOf8Hour = 8 * 60 * 60 * 1000;
-        return new Date(timeOfBeginningOfDate + timeOf8Hour);
+        long timeOf8HourAnd20Minutes = (8 * 60 + 20) * 60 * 1000;
+        return new Date(timeOfBeginningOfDate + timeOf8HourAnd20Minutes);
     }
 
     public static Date convertTo7DaysLater(Date date) {

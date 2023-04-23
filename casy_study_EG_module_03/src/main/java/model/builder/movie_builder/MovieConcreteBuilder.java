@@ -1,7 +1,7 @@
 package model.builder.movie_builder;
 
 
-import model.entity.Movie;
+import model.domain.Movie;
 
 import java.text.ParseException;
 import java.util.Date;

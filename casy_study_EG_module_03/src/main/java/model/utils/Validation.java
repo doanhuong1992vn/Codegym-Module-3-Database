@@ -43,7 +43,7 @@ public class Validation {
     }
 
     public static boolean isInWorkingTimeOfMovieTheater(Date date) throws ParseException {
-        Date datetimeAt8hAm = Converter.convertTo8hAmOfDate(date);
+        Date datetimeAt8hAm = Converter.convertTo8h20AmOfDate(date);
         return date.after(datetimeAt8hAm);
     }
 

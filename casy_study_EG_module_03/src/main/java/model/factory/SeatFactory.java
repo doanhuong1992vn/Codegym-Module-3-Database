@@ -1,11 +1,11 @@
 package model.factory;
 
 
-import model.entity.seat.Seat;
-import model.entity.seat.extend.DeluxeSeat;
-import model.entity.seat.extend.StandardSeat;
-import model.entity.seat.extend.SweetBox;
-import model.entity.seat.extend.VipSeat;
+import model.domain.seat.Seat;
+import model.domain.seat.extend.DeluxeSeat;
+import model.domain.seat.extend.StandardSeat;
+import model.domain.seat.extend.SweetBox;
+import model.domain.seat.extend.VipSeat;
 
 public class SeatFactory {
     private static final String[] alphabet =

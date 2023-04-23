@@ -1,7 +1,7 @@
 package model.dao;
 
 
-import model.entity.Movie;
+import model.domain.Movie;
 
 import java.util.List;
 

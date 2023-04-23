@@ -1,9 +1,9 @@
 package model.builder.user_builder;
 
-import model.entity.users.User;
-import model.entity.users.extend.Admin;
-import model.entity.users.extend.Customer;
-import model.entity.users.extend.Staff;
+import model.domain.users.User;
+import model.domain.users.extend.Admin;
+import model.domain.users.extend.Customer;
+import model.domain.users.extend.Staff;
 
 import java.util.Date;
 
@@ -102,5 +102,10 @@ public class UserConcreteBuilder implements IUserBuilder {
         } else {
             return new Admin(type, fullName, phoneNumber, email, password);
         }
+    }
+
+    @Override
+    public User buildInsert() {
+        return new Customer(type, fullName, phoneNumber, email, password);
     }
 }

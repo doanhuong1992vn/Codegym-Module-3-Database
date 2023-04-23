@@ -1,7 +1,7 @@
 package model.dao;
 
 
-import model.entity.seat.Seat;
+import model.domain.seat.Seat;
 
 import java.util.List;
 

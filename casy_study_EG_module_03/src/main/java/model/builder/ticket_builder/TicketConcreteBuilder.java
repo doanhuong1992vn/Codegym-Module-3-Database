@@ -1,27 +1,19 @@
 package model.builder.ticket_builder;
 
 
-import model.entity.Ticket;
+import model.domain.Ticket;
 
 import java.util.Date;
 
 public class TicketConcreteBuilder implements ITicketBuilder {
     private long id;
+    private double price;
     private long idUser;
     private long idSeat;
-    private String userName;
-    private long idMovieTheater;
-    private String movieTheaterName;
-    private String movieTheaterAddress;
-    private long idCinema;
-    private String cinemaName;
-    private String movieName;
-    private int movieDuration;
-    private String seatCode;
-    private Date showtime;
-    private Date endTime;
-    private int personNumber;
-    private double price;
+    private Date timeBooking;
+    private boolean isPaid;
+    private Date timePayment;
+    private boolean isChecked;
 
     @Override
     public ITicketBuilder id(long id) {
@@ -42,85 +34,42 @@ public class TicketConcreteBuilder implements ITicketBuilder {
     }
 
     @Override
-    public ITicketBuilder username(String userName) {
-        this.userName = userName;
-        return this;
-    }
-
-    @Override
-    public ITicketBuilder seatCode(String seatCode) {
-        this.seatCode = seatCode;
-        return this;
-    }
-
-    @Override
-    public ITicketBuilder capacity(int personNumber) {
-        this.personNumber = personNumber;
-        return this;
-    }
-
-    @Override
     public ITicketBuilder price(double price) {
         this.price = price;
         return this;
     }
 
     @Override
-    public ITicketBuilder idMovieTheater(long idMovieTheater) {
-        this.idMovieTheater = idMovieTheater;
+    public ITicketBuilder timeBooking(Date timeBooking) {
+        this.timeBooking = timeBooking;
         return this;
     }
 
     @Override
-    public ITicketBuilder nameOfMovieTheater(String nameOfMovieTheater) {
-        this.movieTheaterName = nameOfMovieTheater;
+    public ITicketBuilder isPaid(boolean isPaid) {
+        this.isPaid = isPaid;
         return this;
     }
 
     @Override
-    public ITicketBuilder addressOfMovieTheater(String addressOfMovieTheater) {
-        this.movieTheaterAddress = addressOfMovieTheater;
+    public ITicketBuilder timePayment(Date timePayment) {
+        this.timePayment = timePayment;
         return this;
     }
 
     @Override
-    public ITicketBuilder idRoom(long idRoom) {
-        this.idCinema = idRoom;
-        return this;
-    }
-
-    @Override
-    public ITicketBuilder nameRoom(String nameRoom) {
-        this.cinemaName = nameRoom;
-        return this;
-    }
-
-    @Override
-    public ITicketBuilder nameMovie(String movieName) {
-        this.movieName = movieName;
-        return this;
-    }
-
-    @Override
-    public ITicketBuilder movieDuration(int movieDuration) {
-        this.movieDuration = movieDuration;
-        return this;
-    }
-
-    @Override
-    public ITicketBuilder startTime(Date startTime) {
-        this.showtime = startTime;
-        return this;
-    }
-
-    @Override
-    public ITicketBuilder endTime(Date endTime) {
-        this.endTime = endTime;
+    public ITicketBuilder isChecked(boolean isChecked) {
+        this.isChecked = isChecked;
         return this;
     }
 
     @Override
     public Ticket build() {
-        return null;
+        return new Ticket(id, price, idUser, idSeat, timeBooking, isPaid, timePayment, isChecked);
+    }
+
+    @Override
+    public Ticket buildInsert() {
+        return new Ticket(price, idUser, idSeat, timeBooking, isPaid, timePayment, isChecked);
     }
 }

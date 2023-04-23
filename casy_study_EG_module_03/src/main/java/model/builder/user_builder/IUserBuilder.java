@@ -1,7 +1,7 @@
 package model.builder.user_builder;
 
 
-import model.entity.users.User;
+import model.domain.users.User;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -20,4 +20,6 @@ public interface IUserBuilder {
     IUserBuilder address(String address);
     IUserBuilder wallet(double wallet);
     User build();
+    User buildInsert();
+
 }

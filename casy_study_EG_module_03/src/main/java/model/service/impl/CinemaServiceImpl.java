@@ -1,10 +1,8 @@
 package model.service.impl;
 
-import model.dao.iplm.ShowtimeDAO;
-import model.entity.Showtime;
+import model.dao.iplm.CinemaDAO;
+import model.dto.DomainDTO;
 import model.service.ICinemaService;
-
-import java.util.*;
 
 public class CinemaServiceImpl implements ICinemaService {
     public static ICinemaService getCinemaService() {
@@ -12,7 +10,7 @@ public class CinemaServiceImpl implements ICinemaService {
     }
 
     @Override
-    public Map<String, Set<Showtime>> getMapShowtime(long idMovie, Date date) {
-        return ShowtimeDAO.getShowtimeDAO().getMap(idMovie, date);
+    public DomainDTO getDomainDTO(long idShowtime) {
+        return CinemaDAO.getInstance().getDomainDTO(idShowtime);
     }
 }

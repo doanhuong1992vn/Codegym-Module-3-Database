@@ -1,8 +1,6 @@
 package model.service;
 
-import model.entity.seat.Seat;
-
-import java.util.List;
+import model.domain.seat.Seat;
 
 public interface ISeatService {
     Seat[][] getSeatsByIdShowtime(long id);

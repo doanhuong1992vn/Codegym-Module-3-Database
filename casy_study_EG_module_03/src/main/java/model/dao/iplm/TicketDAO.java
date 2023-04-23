@@ -1,7 +1,7 @@
 package model.dao.iplm;
 
 import model.dao.ITicketDAO;
-import model.entity.Ticket;
+import model.domain.Ticket;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

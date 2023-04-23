@@ -1,8 +1,7 @@
 package model.builder.showtime_builder;
 
 
-import model.entity.Movie;
-import model.entity.Showtime;
+import model.domain.Showtime;
 
 import java.util.Date;
 

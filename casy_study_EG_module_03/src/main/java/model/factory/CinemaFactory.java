@@ -1,8 +1,8 @@
 package model.factory;
 
 
-import model.entity.cinema.Cinema;
-import model.entity.cinema.extend.StandardCinema;
+import model.domain.cinema.Cinema;
+import model.domain.cinema.extend.StandardCinema;
 
 public class CinemaFactory {
     private static final CinemaFactory CINEMA_FACTORY = new CinemaFactory();

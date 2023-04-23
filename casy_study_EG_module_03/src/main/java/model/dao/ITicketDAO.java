@@ -1,7 +1,7 @@
 package model.dao;
 
 
-import model.entity.Ticket;
+import model.domain.Ticket;
 
 import java.util.List;
 
