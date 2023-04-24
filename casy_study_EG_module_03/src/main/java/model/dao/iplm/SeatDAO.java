@@ -83,34 +83,34 @@ public class SeatDAO implements ISeatDAO {
         return null;
     }
     // Hàm main này dùng trong trường hợp set lại toàn bộ cột PRICE của table SEAT trong database
- /*   public static void main(String[] args) {
-        try (Connection connection = ConnectionDAO.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM SEAT")) {
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                long id = resultSet.getLong("ID");
-                String type = resultSet.getString("TYPE");
-                String code = resultSet.getString("CODE");
-                boolean isEmpty = resultSet.getBoolean("IS_EMPTY");
-                long idShowtime = resultSet.getLong("ID_SHOWTIME");
-                Seat seat = SeatFactory.getInstance().getSeat(id, type, code, isEmpty, idShowtime, 0);
-                Room room = RoomDAO.getRoomDAO().getRoomByIdShowtime(idShowtime);
-                seat.setPrice(seat.getSurcharge() + room.getSurcharge());
-                String SQL = "INSERT INTO SEAT (ID, TYPE, CODE, IS_EMPTY, ID_SHOWTIME, PRICE) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE PRICE = ?;";
-                try (Connection connection2 = ConnectionDAO.getInstance().getConnection();
-                     PreparedStatement preparedStatement2 = connection2.prepareStatement(SQL)) {
-                    preparedStatement2.setLong(1, seat.getId());
-                    preparedStatement2.setString(2, seat.getType());
-                    preparedStatement2.setString(3, seat.getCode());
-                    preparedStatement2.setBoolean(4, seat.isEmpty());
-                    preparedStatement2.setLong(5, seat.getIdShowtime());
-                    preparedStatement2.setDouble(6, seat.getPrice());
-                    preparedStatement2.setDouble(7, seat.getPrice());
-                    preparedStatement2.executeUpdate();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
+//    public static void main(String[] args) {
+//        try (Connection connection = ConnectionDAO.getInstance().getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM SEAT")) {
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            while (resultSet.next()) {
+//                long id = resultSet.getLong("ID");
+//                String type = resultSet.getString("TYPE");
+//                String code = resultSet.getString("CODE");
+//                boolean isEmpty = resultSet.getBoolean("IS_EMPTY");
+//                long idShowtime = resultSet.getLong("ID_SHOWTIME");
+//                Seat seat = SeatFactory.getInstance().getSeat(id, type, code, isEmpty, idShowtime, 0);
+//                Room room = RoomDAO.getRoomDAO().getRoomByIdShowtime(idShowtime);
+//                seat.setPrice(seat.getSurcharge() + room.getSurcharge());
+//                String SQL = "INSERT INTO SEAT (ID, TYPE, CODE, IS_EMPTY, ID_SHOWTIME, PRICE) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE PRICE = ?;";
+//                try (Connection connection2 = ConnectionDAO.getInstance().getConnection();
+//                     PreparedStatement preparedStatement2 = connection2.prepareStatement(SQL)) {
+//                    preparedStatement2.setLong(1, seat.getId());
+//                    preparedStatement2.setString(2, seat.getType());
+//                    preparedStatement2.setString(3, seat.getCode());
+//                    preparedStatement2.setBoolean(4, seat.isEmpty());
+//                    preparedStatement2.setLong(5, seat.getIdShowtime());
+//                    preparedStatement2.setDouble(6, seat.getPrice());
+//                    preparedStatement2.setDouble(7, seat.getPrice());
+//                    preparedStatement2.executeUpdate();
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

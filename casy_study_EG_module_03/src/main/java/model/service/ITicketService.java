@@ -1,12 +1,13 @@
 package model.service;
 
 import model.domain.Ticket;
-import model.domain.users.User;
+import model.domain.seat.Seat;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ITicketService {
     List<String> getInfo(String[] idSeats);
 
-    List<Ticket> getTickets(String[] idSeats, long idUser);
+    Map<Seat, Ticket> getSeatAndTicketMap(String[] idSeats, long idUser);
 }

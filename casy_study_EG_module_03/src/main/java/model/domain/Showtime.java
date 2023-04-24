@@ -1,6 +1,7 @@
 package model.domain;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Showtime {
@@ -24,13 +25,27 @@ public class Showtime {
     public long getTimeOfStartTime() {
         return startTime.getTime();
     }
+    public String getDayMonthFormat() {
+        return new SimpleDateFormat("dd MMMM").format(getStartTime());
+    }
 
+    public String getDayMonthYearFormat() {
+        return new SimpleDateFormat("dd MMMM yyyy").format(getStartTime());
+    }
+
+    public String getStartTimeFormat24h() {
+        return new SimpleDateFormat("HH:mm a").format(getStartTime());
+    }
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
     public Date getEndTime() {
         return endTime;
+    }
+
+    public String getEndTimeFormat24h() {
+        return new SimpleDateFormat("HH:mm a").format(getEndTime());
     }
 
     public void setEndTime(Date endTime) {

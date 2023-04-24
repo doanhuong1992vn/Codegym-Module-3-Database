@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TicketDAO implements ITicketDAO {
-    private static final String INSERT_TICKET = "INSERT INTO TICKET (ID_USER, ID_SEAT, PRICE, TIME_BOOKING, PAID, TIME_PAYMENT, CHECKED) VALUES (?,?,?,?,?,?,?);";
+    private static final String INSERT_TICKET = "INSERT INTO TICKET ( PRICE, ID_USER, ID_SEAT, TIME_BOOKING, PAID, TIME_PAYMENT, CHECKED) VALUES (?,?,?,?,?,?,?);";
     private static final String SELECT_ALL = "SELECT * FROM TICKET;";
     private static final ITicketDAO ticketDAO = new TicketDAO();
     private TicketDAO (){}
@@ -48,8 +48,8 @@ public class TicketDAO implements ITicketDAO {
             preparedStatement.setLong(3, ticket.getIdSeat());
             preparedStatement.setTimestamp(4, new Timestamp(ticket.getTimeBooking().getTime()));
             preparedStatement.setBoolean(5, ticket.isPaid());
-            Timestamp timestamp = ticket.getTimePayment() == null ? null : new Timestamp(ticket.getTimePayment().getTime());
-            preparedStatement.setTimestamp(6, timestamp) ;
+            Timestamp timePayment = ticket.getTimePayment() == null ? null : new Timestamp(ticket.getTimePayment().getTime());
+            preparedStatement.setTimestamp(6, timePayment) ;
             preparedStatement.setBoolean(7, ticket.isChecked());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();

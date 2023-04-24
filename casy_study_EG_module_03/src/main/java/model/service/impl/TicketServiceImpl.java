@@ -9,9 +9,7 @@ import model.domain.seat.Seat;
 import model.domain.users.User;
 import model.service.ITicketService;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class TicketServiceImpl implements ITicketService {
     public static ITicketService getTicketService(){
@@ -23,11 +21,12 @@ public class TicketServiceImpl implements ITicketService {
     }
 
     @Override
-    public List<Ticket> getTickets(String[] idSeats, long idUser) {
-        List<Ticket> tickets = new ArrayList<>();
+    public Map<Seat, Ticket> getSeatAndTicketMap(String[] idSeats, long idUser) {
+        Map<Seat, Ticket> seatAndTicketMap = new TreeMap<>(Comparator.comparingLong(Seat::getId));
         for (String strIdSeat : idSeats) {
             long idSeat = Long.parseLong(strIdSeat);
             Seat seat = SeatDAO.getSeatDAO().getSeatById(idSeat);
+            seat.setEmpty(false);
             ITicketBuilder ticketBuilder = new TicketConcreteBuilder()
                     .price(seat.getPrice())
                     .idSeat(idSeat)
@@ -39,8 +38,8 @@ public class TicketServiceImpl implements ITicketService {
             Ticket ticket = ticketBuilder.buildInsert();
             long idTicket = TicketDAO.getTicketDAO().insertTicket(ticket);
             ticket.setId(idTicket);
-            tickets.add(ticket);
+            seatAndTicketMap.put(seat, ticket);
         }
-        return tickets;
+        return seatAndTicketMap;
     }
 }

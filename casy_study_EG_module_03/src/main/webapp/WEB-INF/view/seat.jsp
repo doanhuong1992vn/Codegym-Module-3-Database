@@ -53,8 +53,9 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Rạp: ${sessionScope.get('domainDTO').getCinema().getName()}</li>
                 <li class="list-group-item">Địa chỉ: ${sessionScope.get('domainDTO').getCinema().getAddress()}</li>
+                <li class="list-group-item">Ngày chiếu: ${sessionScope.get('domainDTO').getShowtime().getDayMonthYearFormat()}</li>
                 <li class="list-group-item">
-                    Suất chiếu: ${sessionScope.get('domainDTO').getShowtime().getStartTime()}
+                    Suất chiếu: ${sessionScope.get('domainDTO').getShowtime().getStartTimeFormat24h()}
                 </li>
                 <li class="list-group-item">Phòng chiếu: ${sessionScope.get('domainDTO').getRoom().getName()}</li>
                 <li class="list-group-item">Ghế: <span id="seatCodes" name="seatCodes"></span></li>

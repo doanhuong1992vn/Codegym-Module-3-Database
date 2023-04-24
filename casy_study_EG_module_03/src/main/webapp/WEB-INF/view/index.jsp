@@ -15,48 +15,52 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <form class="d-flex input-group w-auto" action="${pageContext.request.contextPath}/" method="get">
-            <input
-                    type="search"
-                    class="form-control rounded"
-                    placeholder="Search"
-                    aria-label="Search"
-                    aria-describedby="search-addon"
-                    name="search"
-            />
+            <input type="search"
+                   class="form-control rounded"
+                   placeholder="Search"
+                   aria-label="Search"
+                   aria-describedby="search-addon"
+                   name="search"
+            style="background-color: antiquewhite;"/>
             <span class="input-group-text text-white border-0" id="search-addon">
-        <i class="fas fa-search"><button type="submit"></button></i>
+        <button style="background: #332D2D; border: none">
+            <i class="fas fa-search" style="color: antiquewhite"></i>
+        </button>
       </span>
         </form>
     </div>
-    <div>
-        <div class="nav-item navbar-brand">
-            <c:if test="${sessionScope.get('user') == null}">
+    <div class="nav-item navbar-brand">
+        <c:choose>
+            <c:when test="${sessionScope.get('user') == null}">
                 <form action="${pageContext.request.contextPath}/login" method="get">
-                    <div class="nav-item navbar-brand" style="position: absolute; top: 0.1rem; right: 15rem">
-                    <button type="submit"
-                            class="btn btn-outline-dark"
-                            data-mdb-ripple-color="dark"
-                            style="background-color: antiquewhite">
-                        Đăng nhập/Đăng ký
-                    </button>
+                    <div class="nav-item navbar-brand" style="position: absolute; right: 0; top: 0.3vh">
+                        <button type="submit"
+                                class="btn btn-outline-dark"
+                                data-mdb-ripple-color="dark"
+                                style="background-color: antiquewhite">
+                            Đăng nhập/Đăng ký
+                        </button>
                     </div>
                 </form>
-            </c:if>
-            <c:if test="${sessionScope.get('user') != null}">
+            </c:when>
+            <c:when test="${sessionScope.get('user') != null}">
                 <div style="left: 50%; transform: translate(-50%); position: absolute; top: 1rem">
-                <span style="color: chocolate">Xin chào ${sessionScope.get('user').getFullName()}</span>
+                    <span style="color: chocolate;
+                    font-family: math; position: absolute; top: -1.2vh;
+                    left: 50%; transform: translate(-50%);font-size: 1.8rem;">
+                        <span style="font-size: 2.5rem;">ENJOY GALAXY</span>
+                        xin chào ${sessionScope.get('user').getFullName()} !
+                    </span>
                 </div>
-            </c:if>
-        </div>
-
-        <div class="nav-item navbar-brand" style="position: absolute; right: 0.1rem; top: 0.1rem;">
-            <form action="${pageContext.request.contextPath}/logout" method="post">
-                <button type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                        style="background-color: antiquewhite">Đăng xuất khỏi trái đất
-                </button>
-            </form>
-        </div>
-
+                <div class="nav-item navbar-brand" style="position: absolute; right: 0; top: 0.3vh;">
+                    <form action="${pageContext.request.contextPath}/logout" method="get">
+                        <button type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                                style="background-color: antiquewhite">Đăng xuất khỏi trái đất
+                        </button>
+                    </form>
+                </div>
+            </c:when>
+        </c:choose>
     </div>
 </nav>
 <!-- Carousel wrapper -->
@@ -136,7 +140,7 @@
                     <div class="card-body">
                         <h5 class="card-title">${movie.getName()}</h5>
                         <p class="card-text">
-                            Ngày khởi chiếu: <fmt:formatDate value="${movie.getPremiereDate()}"></fmt:formatDate>
+                            Ngày khởi chiếu: ${movie.getPremiereDateFormat()}
                         </p>
                         <button type="submit" class="btn btn-outline-primary" name="idMovie" value="${movie.getId()}">
                             Mua vé

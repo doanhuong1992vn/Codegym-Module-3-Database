@@ -61,9 +61,7 @@
             <input type="submit" value="Chọn ngày">
         </form>
         <h2>Lịch chiếu</h2>
-        <c:if test="${message != null}">
-            <p>${message}</p>
-        </c:if>
+        <h5>${requestScope.get('message')}</h5>
         <ul class="list-group">
             <c:forEach items='${requestScope.get("mapShowtime")}' var="entry">
                 <li class="list-group-item active">Rạp ${entry.getKey()}</li>
@@ -71,8 +69,7 @@
                     <button type="button" class="btn btn-outline-info">
                         <a href="<c:url value="/seat?idShowtime=${showtime.getId()}"/>">
                             <li class="list-group-item" style="color: #17a2b8">
-                                    ${showtime.getStartTime()}
-<%--                                <fmt:formatDate value=""></fmt:formatDate>--%>
+                                    ${showtime.getStartTimeFormat24h()}
                             </li>
                         </a>
                     </button>

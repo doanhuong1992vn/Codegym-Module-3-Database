@@ -101,6 +101,10 @@ public class Movie {
         return premiereDate;
     }
 
+    public String getPremiereDateFormat() {
+        return new SimpleDateFormat("dd MMMM yyyy").format(getPremiereDate());
+    }
+
     public void setPremiereDate(Date premiereDate) {
         this.premiereDate = premiereDate;
     }

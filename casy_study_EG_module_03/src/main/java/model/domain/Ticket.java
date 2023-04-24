@@ -1,6 +1,8 @@
 package model.domain;
 
 
+import model.utils.Converter;
+
 import java.util.Date;
 
 public class Ticket {
@@ -44,6 +46,9 @@ public class Ticket {
 
     public double getPrice() {
         return price;
+    }
+    public String getPriceFormat() {
+        return Converter.formatPrice(getPrice());
     }
 
     public void setPrice(double price) {

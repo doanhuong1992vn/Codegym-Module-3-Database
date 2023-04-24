@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -42,27 +43,28 @@ public class CinemaController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String action = request.getServletPath();
+        HttpSession session = request.getSession();
         try {
             switch (action) {
                 case "/" -> showMovies(request, response);
-                case "/showtime" -> showShowtime(request, response);
-                case "/seat" -> showSeats(request, response);
+                case "/showtime" -> showShowtime(request, response, session);
+                case "/seat" -> showSeats(request, response, session);
                 case "/booking" -> {
                     String[] idSeats = request.getParameterValues("idSeats");
                     if (idSeats == null) {
                         String message = "Vui lòng chọn ghế trước khi xác nhận";
                         request.setAttribute("message", message);
-                        request.getRequestDispatcher("/WEB-INF/view/seat/seat.jsp").forward(request, response);
+                        request.getRequestDispatcher("/WEB-INF/view/seat.jsp").forward(request, response);
                     }
-                    if (request.getSession().getAttribute("user") == null) {
-                        request.getSession().setAttribute("idSeats", idSeats);
+                    User user = (User) session.getAttribute("user");
+                    if (user == null) {
+                        session.setAttribute("idSeats", idSeats);
                         request.getRequestDispatcher("/WEB-INF/view/user/login.jsp").forward(request, response);
                     } else {
-                        User user = (User) request.getSession().getAttribute("user");
-                        List<Ticket> tickets = ticketService.getTickets(idSeats, user.getId());
-                        request.setAttribute("tickets", tickets);
+                        Map<Seat, Ticket> seatAndTicketMap = ticketService.getSeatAndTicketMap(idSeats, user.getId());
+                        request.setAttribute("seatAndTicketMap", seatAndTicketMap);
+                        request.getRequestDispatcher("/WEB-INF/view/ticket.jsp").forward(request, response);
                     }
-
                 }
             }
         } catch (Exception e) {
@@ -70,35 +72,31 @@ public class CinemaController extends HttpServlet {
         }
     }
 
-    private void showSeats(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    private void showSeats(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
         long idShowtime = Long.parseLong(request.getParameter("idShowtime"));
         Seat[][] seats = seatService.getSeatsByIdShowtime(idShowtime);
-        request.getSession().setAttribute("seats", seats);
+        session.setAttribute("seats", seats);
         DomainDTO domainDTO = cinemaService.getDomainDTO(idShowtime);
-        request.getSession().setAttribute("domainDTO", domainDTO);
-        request.getRequestDispatcher("/WEB-INF/view/seat/seat.jsp").forward(request, response);
+        session.setAttribute("domainDTO", domainDTO);
+        request.getRequestDispatcher("/WEB-INF/view/seat.jsp").forward(request, response);
     }
 
-    private void showShowtime(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Date date;
+    private void showShowtime(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
         String dateParameter = request.getParameter("date");
-        if (dateParameter == null || dateParameter.equals("")) {
-            date = new Date();
-        } else {
-            date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
-        }
+        Date date = (dateParameter == null || dateParameter.equals(""))
+                ? new Date()
+                : new SimpleDateFormat("yyyy-MM-dd").parse(dateParameter);
         long idMovie = Long.parseLong(request.getParameter("idMovie"));
         Movie movie = movieService.getMovieById(idMovie);
         Map<String, Set<Showtime>> mapShowtime = showtimeService.getMapShowtime(idMovie, date);
-        if (mapShowtime.isEmpty()) {
-            String message = "Không có suất chiếu trong ngày "
-                    + new SimpleDateFormat("dd/MM/yyyy").format(date)
-                    + ". Vui lòng chọn ngày khác";
-            request.setAttribute("message", message);
-        }
-        request.getSession().setAttribute("movie", movie);
+        String dateFormat = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        String message = mapShowtime.isEmpty()
+                ? String.format("Không có suất chiếu trong ngày %s . Vui lòng chọn ngày khác", dateFormat)
+                : String.format("Có %d suất chiếu trong ngày %s :", mapShowtime.size(), dateFormat);
+        session.setAttribute("movie", movie);
+        request.setAttribute("message", message);
         request.setAttribute("mapShowtime", mapShowtime);
-        request.getRequestDispatcher("/WEB-INF/view/showtime/showtime.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/showtime.jsp").forward(request, response);
     }
 
     private void showMovies(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -106,14 +104,14 @@ public class CinemaController extends HttpServlet {
             String search = request.getParameter("search");
             List<Movie> movies = movieService.getMoviesBySearch(search);
             if (movies.isEmpty()) {
-                String message = "Không tìm thấy phim với từ khóa " + search;
+                String message = "Không tìm thấy phim nào khớp với từ khóa \"" + search + "\"";
                 request.setAttribute("message", message);
             }
             request.setAttribute("movies", movies);
         } else {
             request.setAttribute("movies", movieService.getAll());
         }
-        request.getRequestDispatcher("/WEB-INF/view/home/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
     }
 
     @Override

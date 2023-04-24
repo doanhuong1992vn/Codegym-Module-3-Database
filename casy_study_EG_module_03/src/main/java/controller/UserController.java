@@ -20,19 +20,25 @@ public class UserController extends HttpServlet {
     private IMovieService movieService;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         userService = UserServiceImpl.getUserService();
         movieService = MovieServiceImpl.getMovieService();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         String action = request.getServletPath();
+        HttpSession session = request.getSession();
         try {
             switch (action) {
-                case "/login" ->
-                        request.getRequestDispatcher("/WEB-INF/view/user/login.jsp").forward(request, response);
+                case "/login" -> request
+                        .getRequestDispatcher("/WEB-INF/view/user/login.jsp")
+                        .forward(request, response);
+                case "/logout" -> {
+                    session.invalidate();
+                    showHomePage(request, response);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,9 +46,10 @@ public class UserController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         String action = request.getServletPath();
+        HttpSession session = request.getSession();
         try {
             switch (action) {
                 case "/logged" -> {
@@ -53,18 +60,13 @@ public class UserController extends HttpServlet {
                         String message = "Thông tin đăng nhập không chính xác";
                         showLoginForm(request, response, message);
                     }
-                    HttpSession session = request.getSession();
                     session.setAttribute("user", user);
-                    if (request.getSession().getAttribute("idSeats") != null) {
-                        request.getRequestDispatcher("/WEB-INF/view/seat/seat.jsp").forward(request, response);
+                    if (session.getAttribute("idSeats") != null) {
+                        request.getRequestDispatcher("/WEB-INF/view/seat.jsp").forward(request, response);
                     }
                     showHomePage(request, response);
                 }
                 case "/register" -> register(request, response);
-                case "/logout" -> {
-                    request.getSession().invalidate();
-                    showHomePage(request, response);
-                }
 
             }
         } catch (Exception e) {
@@ -74,7 +76,7 @@ public class UserController extends HttpServlet {
 
     private void showHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("movies", movieService.getAll());
-        request.getRequestDispatcher("/WEB-INF/view/home/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
     }
 
     private void showLoginForm(HttpServletRequest request, HttpServletResponse response, String message) throws ServletException, IOException {
