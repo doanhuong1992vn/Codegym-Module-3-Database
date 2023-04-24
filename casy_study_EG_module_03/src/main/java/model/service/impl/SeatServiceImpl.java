@@ -24,15 +24,7 @@ public class SeatServiceImpl implements ISeatService {
         do {
             seatList = SeatDAO.getSeatDAO().getSeatsByIdShowtime(idShowtime);
             if (seatList.isEmpty()) {
-                Seat[][] seats = SeatFactory.getInstance().getSeats(
-                        room.getRowSeat(),
-                        room.getColumnSeat(),
-                        idShowtime);
-                for (Seat[] rowSeat : seats) {
-                    for (Seat seat : rowSeat) {
-                        SeatDAO.getSeatDAO().insertSeat(seat);
-                    }
-                }
+                getSeatsAndInsert(idShowtime, room);
             }
         } while (seatList.isEmpty());
         Seat[][] seats = new Seat[room.getRowSeat()][room.getColumnSeat()];
@@ -42,5 +34,18 @@ public class SeatServiceImpl implements ISeatService {
             seats[indexRow][indexColumn] = seat;
         }
         return seats;
+    }
+
+    public static void getSeatsAndInsert(long idShowtime, Room room) {
+        Seat[][] seats = SeatFactory.getInstance().getSeats(
+                room.getRowSeat(),
+                room.getColumnSeat(),
+                idShowtime);
+        for (Seat[] rowSeat : seats) {
+            for (Seat seat : rowSeat) {
+                seat.setPrice(seat.getSurcharge() + room.getSurcharge());
+                SeatDAO.getSeatDAO().insertSeat(seat);
+            }
+        }
     }
 }

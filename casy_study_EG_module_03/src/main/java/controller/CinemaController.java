@@ -2,7 +2,9 @@ package controller;
 
 import model.domain.Movie;
 import model.domain.Showtime;
+import model.domain.Ticket;
 import model.domain.seat.Seat;
+import model.domain.users.User;
 import model.dto.DomainDTO;
 import model.service.*;
 import model.service.impl.*;
@@ -55,8 +57,12 @@ public class CinemaController extends HttpServlet {
                     if (request.getSession().getAttribute("user") == null) {
                         request.getSession().setAttribute("idSeats", idSeats);
                         request.getRequestDispatcher("/WEB-INF/view/user/login.jsp").forward(request, response);
+                    } else {
+                        User user = (User) request.getSession().getAttribute("user");
+                        List<Ticket> tickets = ticketService.getTickets(idSeats, user.getId());
+                        request.setAttribute("tickets", tickets);
                     }
-                    List<String> info = ticketService.getInfo(idSeats);
+
                 }
             }
         } catch (Exception e) {

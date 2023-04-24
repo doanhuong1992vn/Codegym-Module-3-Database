@@ -7,13 +7,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConnectionDAO implements IConnectionDAO {
-    private static final ConnectionDAO connectionDAO = new ConnectionDAO();
     private static final String jdbcURL = "jdbc:mysql://localhost:3306/ENJOY_GALAXY";
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "123456";
-    private ConnectionDAO() {}
     public static ConnectionDAO getInstance(){
-        return connectionDAO;
+        return new ConnectionDAO();
     }
     @Override
     public Connection getConnection() {

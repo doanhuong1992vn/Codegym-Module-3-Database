@@ -8,8 +8,8 @@ public class SweetBox extends Seat {
         super(type, code, isEmpty, idShowtime, 2);
     }
 
-    public SweetBox(long id, String type, String code, boolean isEmpty, long idShowtime) {
-        super(id, type, code, isEmpty, idShowtime, 2);
+    public SweetBox(long id, String type, String code, boolean isEmpty, long idShowtime, double price) {
+        super(id, type, code, isEmpty, idShowtime, 2, price);
     }
 
     @Override

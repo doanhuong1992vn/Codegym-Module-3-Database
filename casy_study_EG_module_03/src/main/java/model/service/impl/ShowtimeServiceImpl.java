@@ -67,15 +67,7 @@ public class ShowtimeServiceImpl implements IShowtimeService {
                     .endTime(endTime);
             Showtime showtime = showtimeBuilder.build("demo");
             long idShowtime = ShowtimeDAO.getShowtimeDAO().insertShowtime(showtime);
-            Seat[][] seats = SeatFactory.getInstance().getSeats(
-                    room.getRowSeat(),
-                    room.getColumnSeat(),
-                    idShowtime);
-            for (Seat[] rowSeat : seats) {
-                for (Seat seat : rowSeat) {
-                    SeatDAO.getSeatDAO().insertSeat(seat);
-                }
-            }
+            SeatServiceImpl.getSeatsAndInsert(idShowtime, room);
         }
     }
 

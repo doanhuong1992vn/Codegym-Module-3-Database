@@ -7,8 +7,8 @@ public class DeluxeSeat extends Seat {
         super(type, code, isEmpty, idShowtime, 1);
     }
 
-    public DeluxeSeat(long id, String type, String code, boolean isEmpty, long idShowtime) {
-        super(id, type, code, isEmpty, idShowtime, 1);
+    public DeluxeSeat(long id, String type, String code, boolean isEmpty, long idShowtime, double price) {
+        super(id, type, code, isEmpty, idShowtime, 1, price);
     }
 
     @Override

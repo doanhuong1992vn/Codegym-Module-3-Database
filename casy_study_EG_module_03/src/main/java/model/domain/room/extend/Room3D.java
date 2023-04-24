@@ -14,6 +14,6 @@ public class Room3D extends Room {
 
     @Override
     public double getSurcharge() {
-        return 10000;
+        return 20000;
     }
 }

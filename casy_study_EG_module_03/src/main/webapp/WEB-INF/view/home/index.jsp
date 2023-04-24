@@ -9,6 +9,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
@@ -43,7 +44,7 @@
             </c:if>
             <c:if test="${sessionScope.get('user') != null}">
                 <div style="left: 50%; transform: translate(-50%); position: absolute; top: 1rem">
-                <span style="color: chocolate">Xin chào ${user.getFullName()}</span>
+                <span style="color: chocolate">Xin chào ${sessionScope.get('user').getFullName()}</span>
                 </div>
             </c:if>
         </div>
@@ -117,7 +118,6 @@
     </button>
 </div>
 <!-- Carousel wrapper -->
-
 
 <div class="container">
     <div class="row">

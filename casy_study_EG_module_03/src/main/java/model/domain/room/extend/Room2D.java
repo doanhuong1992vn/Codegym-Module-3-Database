@@ -6,7 +6,7 @@ import model.domain.room.Room;
 public class Room2D extends Room {
     @Override
     public double getSurcharge() {
-        return 0;
+        return 10000;
     }
 
     public Room2D(long id, String type, String name, int rowSeat, int columnSeat, long idMovieTheater) {

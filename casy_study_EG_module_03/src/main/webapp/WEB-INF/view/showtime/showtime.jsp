@@ -38,8 +38,8 @@
                             <li class="list-group-item">Đạo diễn: ${sessionScope.get('movie').getDirector()}</li>
                             <li class="list-group-item">Diễn viên: ${sessionScope.get('movie').getActors()}</li>
                             <li class="list-group-item">Thể loại: ${sessionScope.get('movie').getGenre()}</li>
-                            <li class="list-group-item">Ngày khởi chiếu:
-                                <fmt:formatDate value="${sessionScope.get('movie').getPremiereDate()}"></fmt:formatDate>
+                            <li class="list-group-item">Ngày khởi chiếu: ${sessionScope.get('movie').getPremiereDate()}
+<%--                                <fmt:formatDate value=""></fmt:formatDate>--%>
                             </li>
                             <li class="list-group-item">Thời lượng: ${sessionScope.get('movie').getDuration()} phút</li>
                             <li class="list-group-item">Ngôn ngữ: ${sessionScope.get('movie').getLanguage()}</li>
@@ -71,7 +71,8 @@
                     <button type="button" class="btn btn-outline-info">
                         <a href="<c:url value="/seat?idShowtime=${showtime.getId()}"/>">
                             <li class="list-group-item" style="color: #17a2b8">
-                                <fmt:formatDate value="${showtime.getStartTime()}"></fmt:formatDate>
+                                    ${showtime.getStartTime()}
+<%--                                <fmt:formatDate value=""></fmt:formatDate>--%>
                             </li>
                         </a>
                     </button>

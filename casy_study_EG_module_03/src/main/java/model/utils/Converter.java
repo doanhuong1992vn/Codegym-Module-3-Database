@@ -80,7 +80,7 @@ public class Converter {
     }
 
     public static Date convertTo8h20AmOfDate(Date date) throws ParseException {
-        Date beginningOfDate = Converter.convertToBeginningOfDate(date);
+        Date beginningOfDate = convertToBeginningOfDate(date);
         long timeOfBeginningOfDate = beginningOfDate.getTime();
         long timeOf8HourAnd20Minutes = (8 * 60 + 20) * 60 * 1000;
         return new Date(timeOfBeginningOfDate + timeOf8HourAnd20Minutes);

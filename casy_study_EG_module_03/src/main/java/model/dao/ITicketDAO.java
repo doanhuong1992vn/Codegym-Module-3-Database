@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ITicketDAO {
     List<Ticket> getAll();
-    void insertTicket(Ticket ticket);
+    long insertTicket(Ticket ticket);
 }

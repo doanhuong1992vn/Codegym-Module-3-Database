@@ -31,8 +31,8 @@
                             <td>
                                 <input type="checkbox" class="btn-check" id="btn-check-outlined${seat.getCode()}"
                                        name="idSeats" value="${seat.getId()}" onclick="getInfo()">
-                                <input type="hidden" id="${seat.getCode()}" value="${seat.getCode()}">
-                                <label class="btn btn-outline-primary"
+                                <input type="hidden" class="myHidden" id="${seat.getCode()}" value="${seat.getPrice()}">
+                                <label class="btn btn-outline-primary" style="color: black"
                                        for="btn-check-outlined${seat.getCode()}">${seat.getCode()}</label>
                             </td>
                         </c:forEach>
@@ -57,29 +57,36 @@
                     Suất chiếu: ${sessionScope.get('domainDTO').getShowtime().getStartTime()}
                 </li>
                 <li class="list-group-item">Phòng chiếu: ${sessionScope.get('domainDTO').getRoom().getName()}</li>
-                <li class="list-group-item">Ghế: <span id="seatCode"></span></li>
-                <li class="list-group-item">Tổng thiệt hại: <span id="totalPrice"></span></li>
+                <li class="list-group-item">Ghế: <span id="seatCodes" name="seatCodes"></span></li>
+                <li class="list-group-item">Tổng thiệt hại: <span id="totalPrice" name="totalPrice"></span> VNĐ</li>
             </ul>
         </div>
     </div>
 </div>
 <script>
     function getInfo() {
-        let inputElements = document.querySelectorAll("input");
-        for (let i = 0; i < inputElements.length; i++) {
-            if (inputElements[i].checked) {
-                let id = inputElements[i].value;
-                <c:forEach items='${sessionScope.get("seats")}' var="row">
-                <c:forEach items='${row}' var="seat">
-                let seat = ${seat};
-                if (seat.getId() === id) {
-                    document.getElementById("seatCode").innerHTML = ${seat.getCode()};
-                    document.getElementById("totalPrice").innerHTML = ${seat.getCode()};
+        let checkboxElements = document.querySelectorAll(".btn-check");
+        let myHiddenElements = document.querySelectorAll(".myHidden")
+        let myLabels = document.querySelectorAll(".btn-outline-primary");
+        let seatCodes = "";
+        let totalPrice = 0;
+        for (let i = 0; i < checkboxElements.length; i++) {
+            if (checkboxElements[i].checked) {
+                myLabels[i].style.backgroundColor = "chartreuse";
+                myLabels[i].style.color = "white";
+                let seatCode = checkboxElements[i].id.substring(18);
+                let price = myHiddenElements[i].value;
+                if (myHiddenElements[i].id === seatCode) {
+                    seatCodes += seatCode += " ";
+                    totalPrice += Number.parseFloat(price);
                 }
-                </c:forEach>
-                </c:forEach>
+            } else {
+                myLabels[i].style.backgroundColor = "white";
+                myLabels[i].style.color = "black";
             }
         }
+        document.getElementById("seatCodes").innerHTML = seatCodes;
+        document.getElementById("totalPrice").innerHTML = totalPrice.toString();
     }
 </script>
 </body>

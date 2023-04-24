@@ -4,20 +4,22 @@ package model.domain.seat;
 import model.general_abstraction.ISurcharge;
 
 public abstract class Seat implements ISurcharge {
-    private long id;
-    private String type;
-    private String code;
-    private boolean isEmpty = true;
-    private long idShowtime;
-    private int capacity;
+    protected long id;
+    protected String type;
+    protected String code;
+    protected boolean isEmpty;
+    protected long idShowtime;
+    protected int capacity;
+    protected double price;
 
-    public Seat(long id, String type, String code, boolean isEmpty, long idShowtime, int capacity) {
+    public Seat(long id, String type, String code, boolean isEmpty, long idShowtime, int capacity, double price) {
         this.id = id;
         this.type = type;
         this.code = code;
         this.isEmpty = isEmpty;
         this.idShowtime = idShowtime;
         this.capacity = capacity;
+        this.price = price;
     }
 
     public Seat(String type, String code, boolean isEmpty, long idShowtime, int capacity) {
@@ -74,6 +76,14 @@ public abstract class Seat implements ISurcharge {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override

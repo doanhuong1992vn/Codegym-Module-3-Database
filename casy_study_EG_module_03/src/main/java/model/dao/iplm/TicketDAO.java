@@ -3,9 +3,7 @@ package model.dao.iplm;
 import model.dao.ITicketDAO;
 import model.domain.Ticket;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +40,25 @@ public class TicketDAO implements ITicketDAO {
     }
 
     @Override
-    public void insertTicket(Ticket ticket) {
-
+    public long insertTicket(Ticket ticket) {
+        try (Connection connection = ConnectionDAO.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TICKET, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setDouble(1, ticket.getPrice());
+            preparedStatement.setLong(2, ticket.getIdUser());
+            preparedStatement.setLong(3, ticket.getIdSeat());
+            preparedStatement.setTimestamp(4, new Timestamp(ticket.getTimeBooking().getTime()));
+            preparedStatement.setBoolean(5, ticket.isPaid());
+            Timestamp timestamp = ticket.getTimePayment() == null ? null : new Timestamp(ticket.getTimePayment().getTime());
+            preparedStatement.setTimestamp(6, timestamp) ;
+            preparedStatement.setBoolean(7, ticket.isChecked());
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

@@ -82,7 +82,6 @@ public class MovieDAO implements IMovieDAO {
             preparedStatement.setString(8, movie.getContent());
             preparedStatement.setString(9, movie.getUrlImage());
             preparedStatement.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
