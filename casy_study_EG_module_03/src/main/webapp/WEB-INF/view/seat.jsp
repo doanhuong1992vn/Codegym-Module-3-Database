@@ -14,12 +14,23 @@
             transform: translate(-50%);
             margin-top: 5rem;
         }
+        .myColor {
+            position: fixed;
+            left: 50%;
+            transform: translate(-50%);
+            margin-top: 5rem;
+            top: 60%;
+        }
+        .miniColor {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="myClass">
+    <div class="myClass row">
         <form action="${pageContext.request.contextPath}/booking" method="get">
             <c:if test="${requestScope.get('message') != null}">
                 <p style="color: red">Vui lòng chọn ghế trước khi xác nhận</p>
@@ -29,11 +40,28 @@
                     <tr>
                         <c:forEach items='${row}' var="seat">
                             <td>
-                                <input type="checkbox" class="btn-check" id="btn-check-outlined${seat.getCode()}"
-                                       name="idSeats" value="${seat.getId()}" onclick="getInfo()">
-                                <input type="hidden" class="myHidden" id="${seat.getCode()}" value="${seat.getPrice()}">
-                                <label class="btn btn-outline-primary" style="color: black"
-                                       for="btn-check-outlined${seat.getCode()}">${seat.getCode()}</label>
+                                <c:choose>
+                                    <c:when test="${!seat.isEmpty()}">
+                                        <input disabled type="checkbox" class="btn-check"
+                                               id="btn-check-outlined${seat.getCode()}"
+                                               name="idSeats" value="${seat.getId()}" checked>
+                                        <input type="hidden" class="myHidden" id="${seat.getCode()}"
+                                               value="${seat.getPrice()}">
+                                        <label class="btn btn-outline-primary"
+                                               style="color: black; background-color: crimson"
+                                               for="btn-check-outlined${seat.getCode()}">${seat.getCode()}</label>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="checkbox" class="btn-check"
+                                               id="btn-check-outlined${seat.getCode()}"
+                                               name="idSeats" value="${seat.getId()}" onclick="getInfo()">
+                                        <input type="hidden" class="myHidden" id="${seat.getCode()}"
+                                               value="${seat.getPrice()}">
+                                        <label class="btn btn-outline-primary"
+                                               style="color: black; background-color: #EFE4B0"
+                                               for="btn-check-outlined${seat.getCode()}">${seat.getCode()}</label>
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                         </c:forEach>
                     </tr>
@@ -41,6 +69,20 @@
             </table>
             <button type="submit">Xác nhận</button>
         </form>
+    </div>
+    <div class="myColor">
+        <div class="row">
+            <img class="miniColor" src="https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/seat%2Fcrimson.jpg?alt=media&token=24cbb9b6-7b94-4542-955a-8a847f1e9bbf"
+                 alt="Crimson color"><span> Ghế đã bán</span>
+        </div>
+        <div class="row">
+            <img class="miniColor" src="https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/seat%2Fgreen.jpg?alt=media&token=1917c061-5645-4c07-9376-33a3bb91d21a"
+                 alt="Crimson color"><span> Ghế đang chọn</span>
+        </div>
+        <div class="row">
+            <img class="miniColor" src="https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/seat%2Fchicken.jpg?alt=media&token=e7468fb0-1b99-4285-ac1f-b944873c2d86"
+                 alt="Chicken color"><span> Ghế có thể chọn</span>
+        </div>
     </div>
 </div>
 <div class="card" style="position: fixed; width: 25vw; right: 5%">
@@ -53,7 +95,8 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Rạp: ${sessionScope.get('domainDTO').getCinema().getName()}</li>
                 <li class="list-group-item">Địa chỉ: ${sessionScope.get('domainDTO').getCinema().getAddress()}</li>
-                <li class="list-group-item">Ngày chiếu: ${sessionScope.get('domainDTO').getShowtime().getDayMonthYearFormat()}</li>
+                <li class="list-group-item">Ngày
+                    chiếu: ${sessionScope.get('domainDTO').getShowtime().getDayMonthYearFormat()}</li>
                 <li class="list-group-item">
                     Suất chiếu: ${sessionScope.get('domainDTO').getShowtime().getStartTimeFormat24h()}
                 </li>
@@ -72,8 +115,9 @@
         let seatCodes = "";
         let totalPrice = 0;
         for (let i = 0; i < checkboxElements.length; i++) {
-            if (checkboxElements[i].checked) {
-                myLabels[i].style.backgroundColor = "chartreuse";
+            let checkboxElement = checkboxElements[i];
+            if (checkboxElement.checked && !checkboxElement.hasAttribute('disabled')) {
+                myLabels[i].style.backgroundColor = "#27E621";
                 myLabels[i].style.color = "white";
                 let seatCode = checkboxElements[i].id.substring(18);
                 let price = myHiddenElements[i].value;
@@ -81,8 +125,8 @@
                     seatCodes += seatCode += " ";
                     totalPrice += Number.parseFloat(price);
                 }
-            } else {
-                myLabels[i].style.backgroundColor = "white";
+            } else if (!checkboxElement.hasAttribute('disabled')) {
+                myLabels[i].style.backgroundColor = "#EFE4B0";
                 myLabels[i].style.color = "black";
             }
         }

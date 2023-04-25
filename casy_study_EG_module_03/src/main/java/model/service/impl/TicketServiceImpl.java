@@ -27,6 +27,7 @@ public class TicketServiceImpl implements ITicketService {
             long idSeat = Long.parseLong(strIdSeat);
             Seat seat = SeatDAO.getSeatDAO().getSeatById(idSeat);
             seat.setEmpty(false);
+            SeatDAO.getSeatDAO().updateSeat(idSeat);
             ITicketBuilder ticketBuilder = new TicketConcreteBuilder()
                     .price(seat.getPrice())
                     .idSeat(idSeat)

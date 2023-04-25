@@ -17,6 +17,9 @@
             top: 20%;
             transform: translate(-50%);
         }
+        body {
+            background-image: url("https://firebasestorage.googleapis.com/v0/b/module-3-daf70.appspot.com/o/background%2Fbackgound-login.jpg?alt=media&token=b16a4dc8-c450-48de-ba0d-60694b1316ce");
+        }
     </style>
 </head>
 <body>
@@ -24,11 +27,11 @@
     <!-- Pills navs -->
     <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
         <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+            <a class="nav-link active btn-warning" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
                aria-controls="pills-login" aria-selected="true">Login</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
+            <a class="nav-link btn-warning" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
                aria-controls="pills-register" aria-selected="false">Register</a>
         </li>
     </ul>
@@ -51,7 +54,7 @@
                 </div>
 
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4 btn-dark">Sign in</button>
 
             </form>
         </div>
@@ -88,7 +91,7 @@
                 </div>
 
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>
+                <button type="submit" class="btn btn-primary btn-block mb-3 btn-dark">Register</button>
             </form>
         </div>
     </div>

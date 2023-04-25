@@ -21,7 +21,7 @@
                    aria-label="Search"
                    aria-describedby="search-addon"
                    name="search"
-            style="background-color: antiquewhite;"/>
+                   style="background-color: antiquewhite;"/>
             <span class="input-group-text text-white border-0" id="search-addon">
         <button style="background: #332D2D; border: none">
             <i class="fas fa-search" style="color: antiquewhite"></i>
@@ -112,44 +112,51 @@
     <!-- Inner -->
 
     <!-- Controls -->
-    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
+    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample"
+            data-mdb-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="next">
+    <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample"
+            data-mdb-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-<!-- Carousel wrapper -->
+<div class="container-fluid">
 
-<div class="container">
-    <div class="row">
-        <c:if test="${requestScope.get('message') != null}">
-            <br><br>
-            <p>${requestScope.get('message')}</p>
-        </c:if>
-        <form action="${pageContext.request.contextPath}/showtime" method="get">
-            <c:forEach items='${requestScope.get("movies")}' var="movie">
-                <div class="card" style="width: 20rem; float: left; height: 650px; margin: 1rem">
-                    <button type="submit" class="btn btn-outline-dark" name="idMovie" value="${movie.getId()}"
-                            style="height: 455px; width: 20rem; border: none">
-                        <img src="${movie.getUrlImage()}" class="card-img-top" alt='${movie.getName()}'
-                             style="height: 445px; width: 18rem">
-                    </button>
-                    <div class="card-body">
-                        <h5 class="card-title">${movie.getName()}</h5>
-                        <p class="card-text">
-                            Ngày khởi chiếu: ${movie.getPremiereDateFormat()}
-                        </p>
-                        <button type="submit" class="btn btn-outline-primary" name="idMovie" value="${movie.getId()}">
-                            Mua vé
+    <!-- Carousel wrapper -->
+    <div class="col-2"></div>
+    <div class="col-8">
+        <div class="row p-2 justify-content-center">
+            <c:if test="${requestScope.get('message') != null}">
+                <br><br>
+                <p>${requestScope.get('message')}</p>
+            </c:if>
+            <form action="${pageContext.request.contextPath}/showtime" method="get">
+                <c:forEach items='${requestScope.get("movies")}' var="movie">
+                    <div class="card col-3" style="width: 15rem; float: left; height: 650px; margin: 1rem">
+                        <button type="submit" class="btn btn-outline-dark" name="idMovie" value="${movie.getId()}"
+                                style="height: 455px; width: 20rem; border: none">
+                            <img src="${movie.getUrlImage()}" class="card-img-top" alt='${movie.getName()}'
+                                 style="height: 445px; width: 18rem">
                         </button>
+                        <div class="card-body">
+                            <h5 class="card-title">${movie.getName()}</h5>
+                            <p class="card-text">
+                                Ngày khởi chiếu: ${movie.getPremiereDateFormat()}
+                            </p>
+                            <button type="submit" class="btn btn-outline-primary" name="idMovie"
+                                    value="${movie.getId()}">
+                                Mua vé
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </c:forEach>
-        </form>
+                </c:forEach>
+            </form>
+        </div>
     </div>
+    <div class="col-2"></div>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
 </body>

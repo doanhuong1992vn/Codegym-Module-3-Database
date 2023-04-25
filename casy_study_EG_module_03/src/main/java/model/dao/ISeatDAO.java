@@ -9,4 +9,6 @@ public interface ISeatDAO {
     List<Seat> getSeatsByIdShowtime(long idShowtime);
     void insertSeat(Seat seat);
     Seat getSeatById(long idSeat);
+
+    void updateSeat(long idSeat);
 }

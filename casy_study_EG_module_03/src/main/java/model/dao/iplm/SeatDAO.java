@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeatDAO implements ISeatDAO {
+    private static final String UPDATE_SEAT = "UPDATE SEAT SET IS_EMPTY = 0 WHERE ID = ?;";
     private static final String SELECT_SEAT_BY_ID = "SELECT * FROM SEAT WHERE ID = ?";
     private static final String SELECT_SEATS_BY_ID_SHOWTIME = "SELECT * FROM SEAT WHERE ID_SHOWTIME = ?;";
     private static final String INSERT_SEAT = "INSERT INTO SEAT(TYPE, CODE, IS_EMPTY, ID_SHOWTIME, PRICE) VALUES (?,?,?,?,?);";
@@ -26,6 +27,16 @@ public class SeatDAO implements ISeatDAO {
         return seatDAO;
     }
 
+    @Override
+    public void updateSeat(long idSeat) {
+        try (Connection connection = ConnectionDAO.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SEAT)) {
+            preparedStatement.setLong(1, idSeat);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public List<Seat> getSeatsByIdShowtime(long idShowtime) {

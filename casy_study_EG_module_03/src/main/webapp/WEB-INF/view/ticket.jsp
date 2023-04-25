@@ -4,6 +4,8 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
 
@@ -13,11 +15,13 @@
             margin-block-start: 0;
             margin-block-end: 0;
         }
+
         :root {
             --bg: #0d0b5b;
             --font-color: #333333;
             --point-color: #237fff;
         }
+
         body {
             background: var(--bg);
             font-family: "Nunito Sans", sans-serif;
@@ -37,6 +41,7 @@
             transition: transform 0.4s;
             transform-style: preserve-3d;
         }
+
         .ticket:hover {
             transform: rotateY(180deg);
         }
@@ -44,6 +49,7 @@
         .ticket:hover div.back {
             z-index: 100;
         }
+
         .ticket:hover div.front {
             opacity: 0;
         }
@@ -57,6 +63,7 @@
 
             backface-visibility: hidden;
         }
+
         div.side img {
             object-fit: cover;
             width: 100%;
@@ -75,11 +82,13 @@
 
         div.back div.bottom {
         }
+
         div.front {
         }
 
         div.front {
         }
+
         div.back {
             transform: rotateY(180deg);
         }
@@ -96,6 +105,7 @@
             top: 367px;
             z-index: 1;
         }
+
         div.side:after {
             right: 0px;
         }
@@ -108,20 +118,24 @@
             margin: 0;
             margin-bottom: -5px;
         }
+
         div.front span.address {
             font-size: 13px;
             color: var(--font-color);
             letter-spacing: -0.3px;
         }
+
         div.front dl {
             position: relative;
             width: 100%;
         }
+
         div.front dl:after {
             content: "";
             display: block;
             clear: both;
         }
+
         div.front dl dt {
             display: inline-block;
             width: 33%;
@@ -131,6 +145,7 @@
             font-size: 12px;
             position: relative;
         }
+
         div.front dl dd {
             margin-top: 14px;
             display: inline-block;
@@ -142,12 +157,15 @@
             font-size: 26px;
             font-weight: 300;
         }
+
         div.front dl dd:nth-of-type(2) {
             left: 33%;
         }
+
         div.front dl dd:nth-of-type(3) {
             left: 66%;
         }
+
         div.side span.floating {
             display: block;
             position: absolute;
@@ -162,6 +180,7 @@
             text-align: center;
             background: var(--point-color);
         }
+
         span.strong {
             font-weight: 600;
         }
@@ -175,6 +194,7 @@
             display: block;
             transform: rotate(-50deg) translate(7px, 12px);
         }
+
         div.back div.bottom {
             background: var(--point-color);
         }
@@ -193,43 +213,55 @@
             display: block;
             clear: both;
         }
+
         div.back table {
             color: #ffffff;
         }
+
         div.back {
         }
+
         div.back div.span {
             color: #ffffff;
         }
+
         div.back div.top div.span + div.span {
             margin-top: 20px;
         }
+
         div.back div.top h2 {
             font-size: 12px;
             opacity: 0.7;
             font-weight: 300;
             text-transform: uppercase;
         }
+
         div.back div.span span {
             font-size: 19px;
         }
+
         div.back div.span.span8 {
             float: left;
             width: 66.66666%;
         }
+
         div.back div.span.span4 {
             float: left;
             width: 33.33333%;
         }
+
         div.back div.top {
             padding: 60px 40px;
         }
+
         div.payment div.row {
             margin-top: 15px;
         }
+
         div.card-num {
             border-bottom: 1px solid #ffffff;
         }
+
         div.payment input {
             background: transparent;
             border: 0;
@@ -239,18 +271,22 @@
             color: #ffff;
             letter-spacing: 0.2px;
         }
+
         ::placeholder {
             color: #ffffff;
             opacity: 0.7;
         }
+
         div.payment div.row div.span4 {
             width: 30%;
             float: left;
             border-bottom: 1px solid #ffffff;
         }
+
         div.payment div.row div.span4 + div.span4 {
             margin-left: 5%;
         }
+
         div.payment div.span input {
             width: 100%;
         }
@@ -261,86 +297,99 @@
             margin-top: 10px;
         }
 
+        .rowg {
+            position: relative;
+            top: 200px;
+        }
+
     </style>
 </head>
 <body>
 <!-- https://www.behance.net/gallery/34319771/Movie-Ticket-Checkout -->
-<c:set var="domainDTO" value="${sessionScope.get('domainDTO')}" scope="session"/>
-<c:set var="cinema" value="${domainDTO.getCinema()}" scope="session"/>
-<c:set var="showtime" value="${domainDTO.getShowtime()}" scope="session"/>
-<c:set var="movie" value="${sessionScope.get('movie')}" scope="session"/>
-<c:set var="totalPrice" value="${0}" scope="request"/>
-    <c:forEach items="${requestScope.get('seatAndTicketMap').entrySet()}" var="entry">
-        <c:set var="seat" value="${entry.getKey()}" scope="request"/>
-        <c:set var="ticket" value="${entry.getValue()}" scope="request"/>
-        <div class="ticket" style="float: left">
-            <div class="side front">
-                <img src="${movie.getUrlImage()}">
-                <div class="info bottom">
-                    <h1>${movie.getName()}</h1>
-                    <h5 class="title address">Rạp ${cinema.getName()}</h5>
-                    <dl>
-                        <dt>Ngày</dt>
-                        <dd style="font-size: 1rem; font-weight: bold">${showtime.getDayMonthFormat()}</dd>
-                        <dt>Giờ chiếu</dt>
-                        <dd style="font-size: 1rem; font-weight: bold">${showtime.getStartTimeFormat24h()}</dd>
-                        <dt>Kết thúc</dt>
-                        <dd style="font-size: 1rem; font-weight: bold">${showtime.getEndTimeFormat24h()}</dd>
-                    </dl>
-                    <span class="floating price">${seat.getCode()}</span>
+<div class="container-fluid col-md-8">
+    <div class="row" style="left: 50%; transform: translate(-50%); position: fixed; top: 5rem">
+        <span style="color: chocolate; font-family: math; position: absolute; top: -1.2vh;
+              left: 70%; transform: translate(-50%);font-size: 2.5rem; width: 50vw">
+            ENJOY GALAXY xin chân thành cảm ơn!
+        </span>
+    </div>
+    <c:set var="domainDTO" value="${sessionScope.get('domainDTO')}" scope="session"/>
+    <c:set var="cinema" value="${domainDTO.getCinema()}" scope="session"/>
+    <c:set var="showtime" value="${domainDTO.getShowtime()}" scope="session"/>
+    <c:set var="movie" value="${sessionScope.get('movie')}" scope="session"/>
+    <div class="rowg">
+        <c:forEach items="${requestScope.get('seatAndTicketMap').entrySet()}" var="entry">
+            <c:set var="seat" value="${entry.getKey()}" scope="request"/>
+            <c:set var="ticket" value="${entry.getValue()}" scope="request"/>
+            <div class="ticket" style="float: left; margin: 3rem">
+                <div class="side front">
+                    <img src="${movie.getUrlImage()}">
+                    <div class="info bottom">
+                        <h1>${movie.getName()}</h1>
+                        <h5 class="title address">Rạp ${cinema.getName()}</h5>
+                        <dl>
+                            <dt>Ngày</dt>
+                            <dd style="font-size: 1rem; font-weight: bold">${showtime.getDayMonthFormat()}</dd>
+                            <dt>Giờ chiếu</dt>
+                            <dd style="font-size: 1rem; font-weight: bold">${showtime.getStartTimeFormat24h()}</dd>
+                            <dt>Kết thúc</dt>
+                            <dd style="font-size: 1rem; font-weight: bold">${showtime.getEndTimeFormat24h()}</dd>
+                        </dl>
+                        <span class="floating price">${seat.getCode()}</span>
+                    </div>
+                </div>
+                <div class="side back">
+                    <div class="top">
+                        <div class="span">
+                            <h2>Rạp</h2>
+                            <span>${cinema.getName()}</span>
+                        </div>
+                        <div class="span">
+                            <h2>Địa chỉ</h2>
+                            <span>${cinema.getAddress()}</span>
+                        </div>
+                        <div class="span span8">
+                            <h2>Ghế</h2>
+                            <span>${seat.getCode()}</span>
+                        </div>
+                        <div class="span span4">
+                            <h2>Loại ghế</h2>
+                            <span>${seat.getType()}</span>
+                        </div>
+                        <div class="span span8">
+                            <h2>Dành cho</h2>
+                            <span>${seat.getCapacity()} người</span>
+                        </div>
+                        <div class="span span4">
+                            <h2>Giá vé</h2>
+                            <span class="strong">${ticket.getPriceFormat()}</span>
+                        </div>
+                    </div>
+
+                    <div class="payment bottom">
+                        <h1>Kinh phí hạn hẹp nên chưa có chức năng thanh toán. Vui lòng thanh toán tại quầy</h1>
+                            <%--                    <span class="floating"></span>--%>
+                            <%--                    <div class="row card-num">--%>
+                            <%--                        <input type="text" placeholder="0000" maxlength="4">--%>
+                            <%--                        <input type="text" placeholder="0000" maxlength="4">--%>
+                            <%--                        <input type="text" placeholder="0000" maxlength="4">--%>
+                            <%--                        <input type="text" placeholder="0000" maxlength="4">--%>
+                            <%--                    </div>--%>
+                            <%--                    <div class="row">--%>
+                            <%--                        <div class="span span4">--%>
+                            <%--                            <input type="text" placeholder="MM/YY" maxlength="4">--%>
+                            <%--                        </div>--%>
+                            <%--                        <div class="span span4">--%>
+                            <%--                            <input type="text" placeholder="CVV" maxlength="4"></div>--%>
+                            <%--                        <div class="span span4">--%>
+                            <%--                            <input type="text" placeholder="ZIP" maxlength="4"></div>--%>
+                            <%--                    </div>--%>
+                    </div>
                 </div>
             </div>
-            <div class="side back">
-                <div class="top">
-                    <div class="span">
-                        <h2>Rạp</h2>
-                        <span>${cinema.getName()}</span>
-                    </div>
-                    <div class="span">
-                        <h2>Địa chỉ</h2>
-                        <span>${cinema.getAddress()}</span>
-                    </div>
-                    <div class="span span8">
-                        <h2>Ghế</h2>
-                        <span>${seat.getCode()}</span>
-                    </div>
-                    <div class="span span4">
-                        <h2>Loại ghế</h2>
-                        <span>${seat.getType()}</span>
-                    </div>
-                    <div class="span span8">
-                        <h2>Dành cho</h2>
-                        <span>${seat.getCapacity()} người</span>
-                    </div>
-                    <div class="span span4">
-                        <h2>Giá vé</h2>
-                        <span class="strong">${ticket.getPriceFormat()}</span>
-                    </div>
-                </div>
+        </c:forEach>
+    </div>
+</div>
 
-                <div class="payment bottom">
-                    <h1>Kinh phí hạn hẹp nên chưa có chức năng thanh toán. Vui lòng thanh toán tại quầy</h1>
-<%--                    <span class="floating"></span>--%>
-<%--                    <div class="row card-num">--%>
-<%--                        <input type="text" placeholder="0000" maxlength="4">--%>
-<%--                        <input type="text" placeholder="0000" maxlength="4">--%>
-<%--                        <input type="text" placeholder="0000" maxlength="4">--%>
-<%--                        <input type="text" placeholder="0000" maxlength="4">--%>
-<%--                    </div>--%>
-<%--                    <div class="row">--%>
-<%--                        <div class="span span4">--%>
-<%--                            <input type="text" placeholder="MM/YY" maxlength="4">--%>
-<%--                        </div>--%>
-<%--                        <div class="span span4">--%>
-<%--                            <input type="text" placeholder="CVV" maxlength="4"></div>--%>
-<%--                        <div class="span span4">--%>
-<%--                            <input type="text" placeholder="ZIP" maxlength="4"></div>--%>
-<%--                    </div>--%>
-                </div>
-            </div>
-        </div>
-    </c:forEach>
-
-<p class="msg">ENJOY GALAXY xin chân thành cảm ơn!</p>
 </body>
 </html>
