@@ -92,7 +92,8 @@ public class CinemaController extends HttpServlet {
         String dateFormat = new SimpleDateFormat("dd/MM/yyyy").format(date);
         String message = mapShowtime.isEmpty()
                 ? String.format("Không có suất chiếu trong ngày %s . Vui lòng chọn ngày khác", dateFormat)
-                : String.format("Có %d suất chiếu trong ngày %s :", mapShowtime.size(), dateFormat);
+                : String.format("Có %d suất chiếu trong ngày %s :",
+                showtimeService.getNumberShowtime(mapShowtime), dateFormat);
         session.setAttribute("movie", movie);
         request.setAttribute("message", message);
         request.setAttribute("mapShowtime", mapShowtime);

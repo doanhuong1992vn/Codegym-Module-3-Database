@@ -82,4 +82,15 @@ public class ShowtimeServiceImpl implements IShowtimeService {
         }
         return ShowtimeDAO.getShowtimeDAO().getMap(idMovie, date);
     }
+
+    @Override
+    public int getNumberShowtime(Map<String, Set<Showtime>> mapShowtime) {
+        int number = 0;
+        for (Map.Entry<String, Set<Showtime>> entry : mapShowtime.entrySet()) {
+            for (Showtime showtime : entry.getValue()) {
+                number++;
+            }
+        }
+        return number;
+    }
 }

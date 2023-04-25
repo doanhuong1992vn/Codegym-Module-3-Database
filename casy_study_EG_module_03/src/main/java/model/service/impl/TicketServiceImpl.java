@@ -16,11 +16,6 @@ public class TicketServiceImpl implements ITicketService {
         return new TicketServiceImpl();
     }
     @Override
-    public List<String> getInfo(String[] idSeats) {
-        return null;
-    }
-
-    @Override
     public Map<Seat, Ticket> getSeatAndTicketMap(String[] idSeats, long idUser) {
         Map<Seat, Ticket> seatAndTicketMap = new TreeMap<>(Comparator.comparingLong(Seat::getId));
         for (String strIdSeat : idSeats) {
