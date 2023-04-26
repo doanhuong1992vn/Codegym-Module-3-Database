@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Enjoy Galaxy</title>
+    <title>Enjoy Galaxy made by Đoàn Hưởng</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet"/>
@@ -44,13 +44,13 @@
                 <!-- Email or phone number input -->
                 <div class="form-outline mb-4">
                     <input required type="text" id="loginName" class="form-control" name="loginName"/>
-                    <label class="form-label" for="loginName">Email or phone number</label>
+                    <label class="form-label text-white" for="loginName">Email or phone number</label>
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
                     <input required type="password" id="loginPassword" class="form-control" name="password"/>
-                    <label class="form-label" for="loginPassword">Password</label>
+                    <label class="form-label text-white" for="loginPassword">Password</label>
                 </div>
 
                 <!-- Submit button -->
@@ -63,7 +63,7 @@
                 <!-- Name input -->
                 <div class="form-outline mb-4">
                     <input required type="text" id="registerName" class="form-control" name="name"/>
-                    <label class="form-label" for="registerName">Name</label>
+                    <label class="form-label text-white" for="registerName">Name</label>
                 </div>
 
                 <!-- Phone Number input -->
@@ -75,19 +75,19 @@
                            name="phoneNumber"
                            pattern="^(84|0[3|5|7|8|9])+([0-9]{8})$"
                            title="Nhập đúng định dạng SĐT 10 số"/>
-                    <label class="form-label" for="registerUsername">Phone Number</label>
+                    <label class="form-label text-white" for="registerUsername">Phone Number</label>
                 </div>
 
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                     <input required type="email" id="registerEmail" class="form-control" name="email" placeholder="example@gmail.com"/>
-                    <label class="form-label" for="registerEmail">Email</label>
+                    <label class="form-label text-white" for="registerEmail">Email</label>
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
                     <input required type="password" id="registerPassword" class="form-control" name="password"/>
-                    <label class="form-label" for="registerPassword">Password</label>
+                    <label class="form-label text-white" for="registerPassword">Password</label>
                 </div>
 
                 <!-- Submit button -->

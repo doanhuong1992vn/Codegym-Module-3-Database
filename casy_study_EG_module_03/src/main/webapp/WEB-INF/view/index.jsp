@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Enjoy Galaxy</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Enjoy Galaxy made by Đoàn Hưởng</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet"/>
@@ -75,57 +77,8 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-dark h-25">
-    <div class="container-fluid">
-        <form class="d-flex input-group w-auto" action="${pageContext.request.contextPath}/" method="get">
-            <input type="search"
-                   class="form-control rounded"
-                   placeholder="Search"
-                   aria-label="Search"
-                   aria-describedby="search-addon"
-                   name="search"
-                   style="background-color: antiquewhite;"/>
-            <span class="input-group-text text-white border-0" id="search-addon">
-        <button style="background: #332D2D; border: none">
-            <i class="fas fa-search" style="color: antiquewhite"></i>
-        </button>
-      </span>
-        </form>
-    </div>
-    <div class="nav-item navbar-brand">
-        <c:choose>
-            <c:when test="${sessionScope.get('user') == null}">
-                <form action="${pageContext.request.contextPath}/login" method="get">
-                    <div class="nav-item navbar-brand" style="position: absolute; right: 0; top: 0.3vh">
-                        <button type="submit"
-                                class="btn btn-outline-dark"
-                                data-mdb-ripple-color="dark"
-                                style="background-color: antiquewhite">
-                            Đăng nhập/Đăng ký
-                        </button>
-                    </div>
-                </form>
-            </c:when>
-            <c:when test="${sessionScope.get('user') != null}">
-                <div style="left: 50%; transform: translate(-50%); position: absolute; top: 1rem">
-                    <span style="color: chocolate;
-                    font-family: math; position: absolute; top: -1.2vh;
-                    left: 50%; transform: translate(-50%);font-size: 1.8rem;">
-                        <span style="font-size: 2.5rem;">ENJOY GALAXY</span>
-                        xin chào ${sessionScope.get('user').getFullName()} !
-                    </span>
-                </div>
-                <div class="nav-item navbar-brand" style="position: absolute; right: 0; top: 0.3vh;">
-                    <form action="${pageContext.request.contextPath}/logout" method="get">
-                        <button type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                                style="background-color: antiquewhite">Đăng xuất khỏi trái đất
-                        </button>
-                    </form>
-                </div>
-            </c:when>
-        </c:choose>
-    </div>
-</nav>
+<%@include file="/WEB-INF/view/common/navbar.jsp"%>
+<main>
 <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
     <!-- Indicators -->
     <div class="carousel-indicators">
@@ -210,6 +163,8 @@
         </c:forEach>
     </form>
 </div>
+</main>
+<%@include file="/WEB-INF/view/common/footer.jsp"%>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
 </body>
 </html>

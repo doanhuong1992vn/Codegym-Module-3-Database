@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet(name = "CinemaController", urlPatterns = {"/", "/showtime", "/seat", "/booking"})
+@WebServlet(name = "CinemaController", urlPatterns = {"/", "/showtime", "/seat", "/booking", ""})
 public class CinemaController extends HttpServlet {
     private IMovieService movieService;
     private IShowtimeService showtimeService;
@@ -46,7 +46,7 @@ public class CinemaController extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             switch (action) {
-                case "/" -> showMovies(request, response);
+                case "/", "" -> showMovies(request, response);
                 case "/showtime" -> showShowtime(request, response, session);
                 case "/seat" -> showSeats(request, response, session);
                 case "/booking" -> {

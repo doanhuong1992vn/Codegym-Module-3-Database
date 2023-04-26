@@ -25,8 +25,8 @@ public class MovieServiceImpl implements IMovieService {
     @Override
     public Movie getRandomMovie() {
         List<Movie> movies = getAll();
-        int count = movies.size() - 1;
-        int randomIndex = (int) Math.ceil(Math.random() * count);
+        int count = movies.size();
+        int randomIndex = (int) Math.floor(Math.random() * count);
         return movies.get(randomIndex);
     }
 
