@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Enjoy Galaxy made by Đoàn Hưởng</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -79,7 +79,7 @@
 
         .btn-7:hover {
             color: rgba(251, 75, 2, 1);
-            background: transparent;
+            background: lightpink;
         }
 
         .btn-7:hover:before {
@@ -125,17 +125,15 @@
 
 </head>
 <body>
-<%@include file="/WEB-INF/view/common/navbar.jsp"%>
+<%@include file="/WEB-INF/view/common/navbar.jsp" %>
 <main>
     <div class="card border-light container border-0" style="background-color: #363b69;">
         <div class="row col-12">
             <div class="col-6 pl-5 card-img-left">
-                <img src="${sessionScope.get('movie').getUrlImage()}"
-                     class="img-fluid m-2 ml-5 pl-3 bg-image hover-zoom" style="height: 55vh"
-                     alt="${sessionScope.get('movie').getName()}">
+                <img src="${sessionScope.get('movie').getUrlImage()}" alt="${sessionScope.get('movie').getName()}"
+                     class="img-fluid m-2 ml-5 pl-3 bg-image hover-zoom" style="height: 55vh">
             </div>
 
-            <%--    </div>--%>
             <div class="card-body col-6 text-white">
                 <h5 class="card-title">${sessionScope.get('movie').getName()}</h5>
                 <div class="card border-0" style="width: 18rem;">
@@ -168,25 +166,26 @@
             </form>
             <h2>Lịch chiếu</h2>
             <h5>${requestScope.get('message')}</h5>
+            <div class="col-12">
             <ul class="list-group">
                 <c:forEach items='${requestScope.get("mapShowtime")}' var="entry">
-                    <li class="list-group-item active">Rạp ${entry.getKey()}</li>
+                    <div class="mb-3">
+                    <li class="list-group-item active text-black font-weight-bold w-25">Rạp ${entry.getKey()}</li>
+                    <div style="background-color: #363b69;">
                     <c:forEach items='${entry.getValue()}' var="showtime">
-                        <button class="custom-btn btn-7"><span>
-                        <a href="<c:url value="/seat?idShowtime=${showtime.getId()}"/>">
-<%--                            <li class="list-group-item text-white">--%>
-
-
-                                    ${showtime.getStartTimeFormat24h()}
-<%--                            </li>--%>
-                        </a>
-                    </span></button>
+                        <button class="custom-btn btn-7 ml-2 mr-2 mt-3 mb-3"><span>
+                            <a href="<c:url value="/seat?idShowtime=${showtime.getId()}"/>" class="text-white">
+                                    ${showtime.getStartTimeFormat24h()}</a>
+                        </span></button>
                     </c:forEach>
+                    </div>
+                    </div>
                 </c:forEach>
             </ul>
+            </div>
         </div>
     </div>
 </main>
-<%@include file="/WEB-INF/view/common/footer.jsp"%>
+<%@include file="/WEB-INF/view/common/footer.jsp" %>
 </body>
 </html>

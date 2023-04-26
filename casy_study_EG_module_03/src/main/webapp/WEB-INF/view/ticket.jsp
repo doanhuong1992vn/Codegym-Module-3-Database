@@ -302,35 +302,25 @@
             margin-top: 10px;
         }
 
-        .rowg {
-            position: relative;
-            top: 200px;
-        }
-
     </style>
 </head>
 <body>
 <%@include file="/WEB-INF/view/common/navbar.jsp"%>
+<c:set var="domainDTO" value="${sessionScope.get('domainDTO')}" scope="session"/>
+<c:set var="cinema" value="${domainDTO.getCinema()}" scope="session"/>
+<c:set var="showtime" value="${domainDTO.getShowtime()}" scope="session"/>
+<c:set var="movie" value="${sessionScope.get('movie')}" scope="session"/>
 <main>
 <!-- https://www.behance.net/gallery/34319771/Movie-Ticket-Checkout -->
 <div class="container-fluid col-md-8">
-    <div class="row" style="left: 50%; transform: translate(-50%); position: fixed; top: 5rem">
-        <span style="color: chocolate; font-family: math; position: absolute; top: -1.2vh;
-              left: 70%; transform: translate(-50%);font-size: 2.5rem; width: 50vw">
-            ENJOY GALAXY xin chân thành cảm ơn!
-        </span>
-    </div>
-    <c:set var="domainDTO" value="${sessionScope.get('domainDTO')}" scope="session"/>
-    <c:set var="cinema" value="${domainDTO.getCinema()}" scope="session"/>
-    <c:set var="showtime" value="${domainDTO.getShowtime()}" scope="session"/>
-    <c:set var="movie" value="${sessionScope.get('movie')}" scope="session"/>
-    <div class="rowg">
-        <c:forEach items="${requestScope.get('seatAndTicketMap').entrySet()}" var="entry">
+
+    <div class="col-12 mt-5">
+        <c:forEach items="${sessionScope.get('seatAndTicketMap').entrySet()}" var="entry">
             <c:set var="seat" value="${entry.getKey()}" scope="request"/>
             <c:set var="ticket" value="${entry.getValue()}" scope="request"/>
-            <div class="ticket" style="float: left; margin: 3rem">
+            <div class="ticket float-left mb-5 col-4 m-3">
                 <div class="side front">
-                    <img src="${movie.getUrlImage()}">
+                    <img src="${movie.getUrlImage()}" alt="${movie.getName()}">
                     <div class="info bottom">
                         <h1>${movie.getName()}</h1>
                         <h5 class="title address">Rạp ${cinema.getName()}</h5>
@@ -375,26 +365,15 @@
 
                     <div class="payment bottom">
                         <h1>Kinh phí hạn hẹp nên chưa có chức năng thanh toán. Vui lòng thanh toán tại quầy</h1>
-                            <%--                    <span class="floating"></span>--%>
-                            <%--                    <div class="row card-num">--%>
-                            <%--                        <input type="text" placeholder="0000" maxlength="4">--%>
-                            <%--                        <input type="text" placeholder="0000" maxlength="4">--%>
-                            <%--                        <input type="text" placeholder="0000" maxlength="4">--%>
-                            <%--                        <input type="text" placeholder="0000" maxlength="4">--%>
-                            <%--                    </div>--%>
-                            <%--                    <div class="row">--%>
-                            <%--                        <div class="span span4">--%>
-                            <%--                            <input type="text" placeholder="MM/YY" maxlength="4">--%>
-                            <%--                        </div>--%>
-                            <%--                        <div class="span span4">--%>
-                            <%--                            <input type="text" placeholder="CVV" maxlength="4"></div>--%>
-                            <%--                        <div class="span span4">--%>
-                            <%--                            <input type="text" placeholder="ZIP" maxlength="4"></div>--%>
-                            <%--                    </div>--%>
                     </div>
                 </div>
             </div>
         </c:forEach>
+    </div>
+    <div class="col-12 m-5 d-flex justify-content-center h1">
+        <span style="color: chocolate; font-family: math">
+            ENJOY GALAXY xin chân thành cảm ơn!
+        </span>
     </div>
 </div>
 </main>

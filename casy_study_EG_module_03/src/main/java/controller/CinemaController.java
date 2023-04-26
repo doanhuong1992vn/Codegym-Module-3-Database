@@ -40,8 +40,7 @@ public class CinemaController extends HttpServlet {
     }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-        request.setCharacterEncoding("UTF-8");
+    public void doGet(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getServletPath();
         HttpSession session = request.getSession();
         try {
@@ -49,26 +48,25 @@ public class CinemaController extends HttpServlet {
                 case "/", "" -> showMovies(request, response);
                 case "/showtime" -> showShowtime(request, response, session);
                 case "/seat" -> showSeats(request, response, session);
-                case "/booking" -> {
-                    String[] idSeats = request.getParameterValues("idSeats");
-                    if (idSeats == null) {
-                        String message = "Vui lòng chọn ghế trước khi xác nhận";
-                        request.setAttribute("message", message);
-                        request.getRequestDispatcher("/WEB-INF/view/seat.jsp").forward(request, response);
-                    }
-                    User user = (User) session.getAttribute("user");
-                    if (user == null) {
-                        session.setAttribute("idSeats", idSeats);
-                        request.getRequestDispatcher("/WEB-INF/view/user/login.jsp").forward(request, response);
-                    } else {
-                        Map<Seat, Ticket> seatAndTicketMap = ticketService.getSeatAndTicketMap(idSeats, user.getId());
-                        request.setAttribute("seatAndTicketMap", seatAndTicketMap);
-                        request.getRequestDispatcher("/WEB-INF/view/ticket.jsp").forward(request, response);
-                    }
-                }
+                case "/booking" -> bookTicket(request, response, session);
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void bookTicket(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+        String[] idSeats = request.getParameterValues("idSeats");
+        if (idSeats == null) {
+            String message = "Vui lòng chọn ghế trước khi xác nhận";
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/WEB-INF/view/seat.jsp").forward(request, response);
+        } else {
+            session.setAttribute("idSeats", idSeats);
+            User user = (User) session.getAttribute("user");
+            Map<Seat, Ticket> seatAndTicketMap = ticketService.getSeatAndTicketMap(idSeats, user.getId());
+            session.setAttribute("seatAndTicketMap", seatAndTicketMap);
+            request.getRequestDispatcher("/WEB-INF/view/ticket.jsp").forward(request, response);
         }
     }
 
@@ -78,7 +76,12 @@ public class CinemaController extends HttpServlet {
         session.setAttribute("seats", seats);
         DomainDTO domainDTO = cinemaService.getDomainDTO(idShowtime);
         session.setAttribute("domainDTO", domainDTO);
-        request.getRequestDispatcher("/WEB-INF/view/seat.jsp").forward(request, response);
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            request.getRequestDispatcher("/WEB-INF/view/user/login.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/WEB-INF/view/seat.jsp").forward(request, response);
+        }
     }
 
     private void showShowtime(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
@@ -113,11 +116,5 @@ public class CinemaController extends HttpServlet {
             request.setAttribute("movies", movieService.getAll());
         }
         request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-
     }
 }
