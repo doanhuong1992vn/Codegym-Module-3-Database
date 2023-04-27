@@ -8,6 +8,7 @@ import model.domain.users.User;
 import model.dto.DomainDTO;
 import model.service.*;
 import model.service.impl.*;
+import model.utils.Converter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -86,7 +87,9 @@ public class CinemaController extends HttpServlet {
 
     private void showShowtime(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
         String dateParameter = request.getParameter("date");
-        Date date = (dateParameter == null || dateParameter.equals(""))
+        Date date = (dateParameter == null
+                || dateParameter.equals("")
+                || dateParameter.equals(new SimpleDateFormat("yyyy-MM-dd").format(new Date())))
                 ? new Date()
                 : new SimpleDateFormat("yyyy-MM-dd").parse(dateParameter);
         long idMovie = Long.parseLong(request.getParameter("idMovie"));

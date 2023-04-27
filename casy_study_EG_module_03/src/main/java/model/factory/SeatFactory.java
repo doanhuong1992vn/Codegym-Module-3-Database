@@ -56,11 +56,20 @@ public class SeatFactory {
         for (int i = 0; i < rowSeat; i++) {
             for (int k = 0; k < columnSeat; k++) {
                 String seatCode = alphabet[i] + (k + 1);
-                switch (i) {
-                    case 0 -> seats[i][k] = getSeat("standard", seatCode, true, idShowtime);
-                    case 1 -> seats[i][k] = getSeat("vipSeat", seatCode, true, idShowtime);
-                    case 2 -> seats[i][k] = getSeat("deluxeSeat", seatCode, true, idShowtime);
-                    default -> seats[i][k] = getSeat("sweetBox", seatCode, true, idShowtime);
+                if (rowSeat < 5) {
+                    switch (i) {
+                        case 0 -> seats[i][k] = getSeat("standard", seatCode, true, idShowtime);
+                        case 1 -> seats[i][k] = getSeat("vipSeat", seatCode, true, idShowtime);
+                        case 2 -> seats[i][k] = getSeat("deluxeSeat", seatCode, true, idShowtime);
+                        default -> seats[i][k] = getSeat("sweetBox", seatCode, true, idShowtime);
+                    }
+                } else {
+                    switch (i) {
+                        case 0, 1 -> seats[i][k] = getSeat("standard", seatCode, true, idShowtime);
+                        case 2, 3 -> seats[i][k] = getSeat("vipSeat", seatCode, true, idShowtime);
+                        case 4, 5 -> seats[i][k] = getSeat("deluxeSeat", seatCode, true, idShowtime);
+                        default -> seats[i][k] = getSeat("sweetBox", seatCode, true, idShowtime);
+                    }
                 }
             }
         }

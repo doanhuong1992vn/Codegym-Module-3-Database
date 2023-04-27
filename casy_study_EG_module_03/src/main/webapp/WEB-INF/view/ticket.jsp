@@ -351,7 +351,7 @@
                         </div>
                         <div class="span span4">
                             <h2>Loại ghế</h2>
-                            <span>${seat.getType()}</span>
+                            <span>${seat.getType().toUpperCase()}</span>
                         </div>
                         <div class="span span8">
                             <h2>Dành cho</h2>

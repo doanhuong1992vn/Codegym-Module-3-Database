@@ -104,10 +104,10 @@
             -moz-transform: rotateX(-90deg);
             transform: rotateX(-90deg);
         }
-
     </style>
 </head>
-<body style="background-image:  url('https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77701249339.jpg')">
+<%--<body style="background-image:  url('https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77701249339.jpg')">--%>
+<body style="background-color: #22254b">
 <%@include file="/WEB-INF/view/common/navbar.jsp" %>
 <main>
     <div class="container col-12">
@@ -126,8 +126,18 @@
                 <div class="col-12 justify-content-center d-flex mb-5 mt-5">
                     <table>
                         <c:forEach items='${sessionScope.get("seats")}' var="row">
+                            <c:if test='${sessionScope.get("seats")[4] == row}'>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </c:if>
                             <tr>
                                 <c:forEach items='${row}' var="seat">
+                                    <c:if test='${seat == row[3]}'>
+                                        <td>
+                                            <div class="m-3"></div>
+                                        </td>
+                                    </c:if>
                                     <td>
                                         <div class="m-2">
                                             <c:choose>
@@ -136,7 +146,7 @@
                                                            id="btn-check-outlined${seat.getCode()}"
                                                            name="idSeats" value="${seat.getId()}" checked>
                                                     <label class="btn btn-outline-primary"
-                                                           style="color: black; background-color: crimson"
+                                                           style="color: black; background-color: crimson;"
                                                            for="btn-check-outlined${seat.getCode()}">
                                                             ${seat.getCode()}</label>
                                                     <input type="hidden" class="myHidden" id="${seat.getCode()}"
@@ -147,7 +157,7 @@
                                                            id="btn-check-outlined${seat.getCode()}"
                                                            name="idSeats" value="${seat.getId()}" onclick="getInfo()">
                                                     <label class="btn btn-outline-primary"
-                                                           style="color: black; background-color: #EFE4B0"
+                                                           style="color: black; background-color: #EFE4B0;"
                                                            for="btn-check-outlined${seat.getCode()}">
                                                             ${seat.getCode()}</label>
                                                     <input type="hidden" class="myHidden" id="${seat.getCode()}"
