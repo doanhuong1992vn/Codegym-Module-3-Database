@@ -3,9 +3,12 @@ package model.dao.iplm;
 
 
 import model.dao.ICinemaDAO;
+import model.domain.Movie;
 import model.domain.Showtime;
+import model.domain.Ticket;
 import model.domain.cinema.Cinema;
 import model.domain.room.Room;
+import model.domain.seat.Seat;
 import model.dto.DomainDTO;
 import model.factory.CinemaFactory;
 
@@ -14,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CinemaDAO implements ICinemaDAO {
@@ -36,6 +40,40 @@ public class CinemaDAO implements ICinemaDAO {
             "JOIN ROOM ON SHOWTIME.ID_ROOM = ROOM.ID " +
             "JOIN CINEMA ON ROOM.ID_CINEMA = CINEMA.ID " +
             "WHERE SHOWTIME.ID = ?;";
+    private static final String SELECT_DOMAIN_DTO_LIST = "SELECT CINEMA.ID AS ID_CINEMA," +
+            "CINEMA.TYPE AS TYPE_CINEMA, " +
+            "    CINEMA.NAME AS NAME_CINEMA, " +
+            "    CINEMA.ADDRESS AS ADDRESS_CINEMA, " +
+            "    ROOM.ID AS ID_ROOM, " +
+            "    ROOM.TYPE AS TYPE_ROOM, " +
+            "    ROOM.NAME AS NAME_ROOM, " +
+            "    ROOM.NUMBER_ROW_SEAT AS NUMBER_ROW_SEAT, " +
+            "    ROOM.NUMBER_COLUMN_SEAT AS NUMBER_COLUMN_SEAT, " +
+            "    SHOWTIME.ID AS ID_SHOWTIME, " +
+            "    SHOWTIME.START_TIME AS START_SHOWTIME, " +
+            "    SHOWTIME.END_TIME AS END_SHOWTIME, " +
+            "    SHOWTIME.ID_MOVIE AS ID_MOVIE, " +
+            "    SEAT.ID AS ID_SEAT, " +
+            "    SEAT.TYPE AS TYPE_SEAT, " +
+            "    SEAT.CODE AS CODE_SEAT, " +
+            "    SEAT.IS_EMPTY AS IS_EMPTY, " +
+            "    SEAT.PRICE AS PRICE_SEAT, " +
+            "    TICKET.ID AS ID_TICKET, " +
+            "    TICKET.PRICE AS PRICE_TICKET, " +
+            "    TICKET.TIME_BOOKING AS TIME_BOOKING, " +
+            "    TICKET.PAID AS PAID, " +
+            "    TICKET.TIME_PAYMENT AS TIME_PAYMENT, " +
+            "    TICKET.CHECKED AS CHECKED, " +
+            "    TICKET.ID_USER AS ID_USER, " +
+            "    MOVIE.NAME AS NAME_MOVIE, " +
+            "    MOVIE.URL_IMAGE AS URL_IMAGE " +
+            "FROM TICKET " +
+            "JOIN SEAT ON TICKET.ID_SEAT = SEAT.ID " +
+            "JOIN SHOWTIME ON SEAT.ID_SHOWTIME = SHOWTIME.ID " +
+            "JOIN MOVIE ON MOVIE.ID = SHOWTIME.ID_MOVIE " +
+            "JOIN ROOM ON SHOWTIME.ID_ROOM = ROOM.ID " +
+            "JOIN CINEMA ON ROOM.ID_CINEMA = CINEMA.ID " +
+            "WHERE TICKET.ID_USER = ?;";
     public static ICinemaDAO getInstance() {
         return new CinemaDAO();
     }
@@ -91,5 +129,30 @@ public class CinemaDAO implements ICinemaDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<DomainDTO> getDomainDTOList(long idUser) {
+        List<DomainDTO> domainDTOList = new ArrayList<>();
+        try (Connection connection = ConnectionDAO.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DOMAIN_DTO_LIST)) {
+            preparedStatement.setLong(1, idUser);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Cinema cinema = getCinema(resultSet);
+                Room room = RoomDAO.getRoomDAO().getRoom(resultSet);
+                Showtime showtime = ShowtimeDAO.getShowtimeDAO().getShowtime(resultSet);
+                Seat seat = SeatDAO.getSeatDAO().getSeat(resultSet);
+                Ticket ticket = TicketDAO.getTicketDAO().getTicket(resultSet);
+                Movie movie = MovieDAO.getMovieDAO().getMovieSimple(resultSet);
+                if (showtime.getEndTime().after(new Date())) {
+                    DomainDTO domainDTO = new DomainDTO(cinema, room, showtime, seat, ticket, movie);
+                    domainDTOList.add(domainDTO);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return domainDTOList;
     }
 }

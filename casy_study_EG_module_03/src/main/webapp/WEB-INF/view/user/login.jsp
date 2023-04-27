@@ -23,15 +23,16 @@
     </style>
 </head>
 <body>
+<%@include file="/WEB-INF/view/common/navbar.jsp"%>
 <div class="container">
     <!-- Pills navs -->
     <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
         <li class="nav-item" role="presentation">
-            <a class="nav-link active btn-warning" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+            <a class="nav-link active btn-dark" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
                aria-controls="pills-login" aria-selected="true">Login</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link btn-warning" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
+            <a class="nav-link btn-dark" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
                aria-controls="pills-register" aria-selected="false">Register</a>
         </li>
     </ul>
@@ -43,18 +44,18 @@
             <form action="${pageContext.request.contextPath}/logged" method="post">
                 <!-- Email or phone number input -->
                 <div class="form-outline mb-4">
-                    <input required type="text" id="loginName" class="form-control" name="loginName"/>
+                    <input required type="text" id="loginName" class="form-control bg-secondary text-white" name="loginName"/>
                     <label class="form-label text-white" for="loginName">Email or phone number</label>
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input required type="password" id="loginPassword" class="form-control" name="password"/>
+                    <input required type="password" id="loginPassword" class="form-control bg-secondary text-white" name="password"/>
                     <label class="form-label text-white" for="loginPassword">Password</label>
                 </div>
 
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4 btn-dark">Sign in</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4 btn-light">Sign in</button>
 
             </form>
         </div>
@@ -62,7 +63,7 @@
             <form action="${pageContext.request.contextPath}/register" method="post">
                 <!-- Name input -->
                 <div class="form-outline mb-4">
-                    <input required type="text" id="registerName" class="form-control" name="name"/>
+                    <input required type="text" id="registerName" class="form-control bg-secondary text-white" name="name"/>
                     <label class="form-label text-white" for="registerName">Name</label>
                 </div>
 
@@ -71,7 +72,7 @@
                     <input required
                            type="tel"
                            id="registerUsername"
-                           class="form-control"
+                           class="form-control bg-secondary text-white"
                            name="phoneNumber"
                            pattern="^(84|0[3|5|7|8|9])+([0-9]{8})$"
                            title="Nhập đúng định dạng SĐT 10 số"/>
@@ -80,23 +81,23 @@
 
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input required type="email" id="registerEmail" class="form-control" name="email" placeholder="example@gmail.com"/>
+                    <input required type="email" id="registerEmail" class="form-control bg-secondary text-white" name="email" placeholder="example@gmail.com"/>
                     <label class="form-label text-white" for="registerEmail">Email</label>
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input required type="password" id="registerPassword" class="form-control" name="password"/>
+                    <input required type="password" id="registerPassword" class="form-control bg-secondary text-white" name="password"/>
                     <label class="form-label text-white" for="registerPassword">Password</label>
                 </div>
 
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-3 btn-dark">Register</button>
+                <button type="submit" class="btn btn-primary btn-block mb-3 btn-light">Register</button>
             </form>
         </div>
     </div>
     <c:if test="${message != null}">
-        <p style="color: red">${message}</p>
+        <p class="bg-danger text-white">${message}</p>
     </c:if>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>

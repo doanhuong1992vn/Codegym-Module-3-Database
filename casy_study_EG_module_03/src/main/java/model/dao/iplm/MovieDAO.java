@@ -35,7 +35,7 @@ public class MovieDAO implements IMovieDAO {
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                movies.add(getMovie(resultSet));
+                movies.add(getMovieFullOption(resultSet));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +43,14 @@ public class MovieDAO implements IMovieDAO {
         return movies;
     }
 
-    private Movie getMovie(ResultSet resultSet) throws SQLException, ParseException {
+    @Override
+    public Movie getMovieSimple(ResultSet resultSet) throws SQLException {
+        String name = resultSet.getString("NAME_MOVIE");
+        String urlImage = resultSet.getString("URL_IMAGE");
+        return new Movie(name, urlImage);
+    }
+
+    private Movie getMovieFullOption(ResultSet resultSet) throws SQLException, ParseException {
         long id = resultSet.getLong("ID");
         String name = resultSet.getString("NAME");
         String director = resultSet.getString("DIRECTOR");
@@ -90,11 +97,11 @@ public class MovieDAO implements IMovieDAO {
     @Override
     public Movie getMovieById(long id) {
         try (Connection connection = ConnectionDAO.getInstance().getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return getMovie(resultSet);
+                return getMovieFullOption(resultSet);
             }
         } catch (Exception e) {
             e.printStackTrace();

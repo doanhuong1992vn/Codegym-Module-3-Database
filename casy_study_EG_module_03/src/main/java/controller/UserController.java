@@ -65,6 +65,7 @@ public class UserController extends HttpServlet {
         if (user == null) {
             String message = "Thông tin đăng nhập không chính xác";
             showLoginForm(request, response, message);
+            return;
         } else {
             session.setAttribute("user", user);
         }

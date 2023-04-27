@@ -129,24 +129,22 @@
 <main>
     <div class="card border-light container border-0" style="background-color: #363b69;">
         <div class="row col-12">
-            <div class="col-6 pl-5 card-img-left">
+            <div class="col-5 pl-5 card-img-left">
                 <img src="${sessionScope.get('movie').getUrlImage()}" alt="${sessionScope.get('movie').getName()}"
                      class="img-fluid m-2 ml-5 pl-3 bg-image hover-zoom" style="height: 55vh">
             </div>
 
-            <div class="card-body col-6 text-white">
+            <div class="card-body col-6 text-white pt-5">
                 <h5 class="card-title">${sessionScope.get('movie').getName()}</h5>
-                <div class="card border-0" style="width: 18rem;">
+                <div class="card border-0 col-12 bg-transparent mt-5">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item text-white">Đạo diễn: ${sessionScope.get('movie').getDirector()}</li>
                         <li class="list-group-item text-white">Diễn viên: ${sessionScope.get('movie').getActors()}</li>
                         <li class="list-group-item text-white">Thể loại: ${sessionScope.get('movie').getGenre()}</li>
                         <li class="list-group-item text-white">
-                            Ngày khởi chiếu: ${sessionScope.get('movie').getPremiereDateFormat()}
-                        </li>
-                        <li class="list-group-item text-white">Thời lượng: ${sessionScope.get('movie').getDuration()}
-                            phút
-                        </li>
+                            Ngày khởi chiếu: ${sessionScope.get('movie').getPremiereDateFormat()}</li>
+                        <li class="list-group-item text-white">
+                            Thời lượng: ${sessionScope.get('movie').getDuration()} phút</li>
                         <li class="list-group-item text-white">Ngôn ngữ: ${sessionScope.get('movie').getLanguage()}</li>
                     </ul>
                 </div>

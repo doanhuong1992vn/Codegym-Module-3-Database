@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Enjoy Galaxy made by Đoàn Hưởng</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -305,78 +305,84 @@
     </style>
 </head>
 <body>
-<%@include file="/WEB-INF/view/common/navbar.jsp"%>
-<c:set var="domainDTO" value="${sessionScope.get('domainDTO')}" scope="session"/>
-<c:set var="cinema" value="${domainDTO.getCinema()}" scope="session"/>
-<c:set var="showtime" value="${domainDTO.getShowtime()}" scope="session"/>
-<c:set var="movie" value="${sessionScope.get('movie')}" scope="session"/>
+<%@include file="/WEB-INF/view/common/navbar.jsp" %>
 <main>
-<!-- https://www.behance.net/gallery/34319771/Movie-Ticket-Checkout -->
-<div class="container-fluid col-md-8">
+    <!-- https://www.behance.net/gallery/34319771/Movie-Ticket-Checkout -->
+    <div class="container-fluid col-md-8">
+        <div class="col-12 mt-5">
+            <c:forEach items="${sessionScope.get('domainDTOList')}" var="domainDTO">
+                <c:set var="cinema" value="${domainDTO.getCinema()}" scope="session"/>
+                <c:set var="room" value="${domainDTO.getRoom()}" scope="session"/>
+                <c:set var="showtime" value="${domainDTO.getShowtime()}" scope="session"/>
+                <c:set var="seat" value="${domainDTO.getSeat()}" scope="session"/>
+                <c:set var="ticket" value="${domainDTO.getTicket()}" scope="session"/>
+                <c:set var="movie" value="${domainDTO.getMovie()}" scope="session"/>
 
-    <div class="col-12 mt-5">
-        <c:forEach items="${sessionScope.get('seatAndTicketMap').entrySet()}" var="entry">
-            <c:set var="seat" value="${entry.getKey()}" scope="request"/>
-            <c:set var="ticket" value="${entry.getValue()}" scope="request"/>
-            <div class="ticket float-left mb-5 col-4 m-3">
-                <div class="side front">
-                    <img src="${movie.getUrlImage()}" alt="${movie.getName()}">
-                    <div class="info bottom">
-                        <h1>${movie.getName()}</h1>
-                        <h5 class="title address">Rạp ${cinema.getName()}</h5>
-                        <dl>
-                            <dt>Ngày</dt>
-                            <dd style="font-size: 1rem; font-weight: bold">${showtime.getDayMonthFormat()}</dd>
-                            <dt>Giờ chiếu</dt>
-                            <dd style="font-size: 1rem; font-weight: bold">${showtime.getStartTimeFormat24h()}</dd>
-                            <dt>Kết thúc</dt>
-                            <dd style="font-size: 1rem; font-weight: bold">${showtime.getEndTimeFormat24h()}</dd>
-                        </dl>
-                        <span class="floating price">${seat.getCode()}</span>
+                <div class="ticket float-left mb-5 col-4 m-3">
+                    <div class="side front">
+                        <img src="${movie.getUrlImage()}" alt="${movie.getName()}">
+                        <div class="info bottom">
+                            <h1>${movie.getName()}</h1>
+                            <h5 class="title address">Rạp ${cinema.getName()}</h5>
+                            <dl>
+                                <dt>Ngày</dt>
+                                <dd style="font-size: 1rem; font-weight: bold">${showtime.getDayMonthFormat()}</dd>
+                                <dt>Giờ chiếu</dt>
+                                <dd style="font-size: 1rem; font-weight: bold">${showtime.getStartTimeFormat24h()}</dd>
+                                <dt>Kết thúc</dt>
+                                <dd style="font-size: 1rem; font-weight: bold">${showtime.getEndTimeFormat24h()}</dd>
+                            </dl>
+                            <span class="floating price">${seat.getCode()}</span>
+                        </div>
+                    </div>
+                    <div class="side back">
+                        <div class="top">
+                            <div class="span">
+                                <h2>Địa chỉ</h2>
+                                <span>${cinema.getAddress()}</span>
+                            </div>
+                            <div class="span">
+                                <h2>Phòng</h2>
+                                <span>${room.getName()}</span>
+                            </div>
+                            <div class="span span8">
+                                <h2>Ghế</h2>
+                                <span>${seat.getCode()}</span>
+                            </div>
+                            <div class="span span4">
+                                <h2>Loại ghế</h2>
+                                <span>${seat.getType().toUpperCase()}</span>
+                            </div>
+                            <div class="span span8">
+                                <h2>Dành cho</h2>
+                                <span>${seat.getCapacity()} người</span>
+                            </div>
+                            <div class="span span4">
+                                <h2>Giá vé</h2>
+                                <span class="strong">${ticket.getPriceFormat()}</span>
+                            </div>
+                        </div>
+
+                        <div class="payment bottom">
+                            <h1>Kinh phí hạn hẹp nên chưa có chức năng thanh toán.
+                                Vui lòng thanh toán tại quầy</h1>
+                        </div>
                     </div>
                 </div>
-                <div class="side back">
-                    <div class="top">
-                        <div class="span">
-                            <h2>Rạp</h2>
-                            <span>${cinema.getName()}</span>
-                        </div>
-                        <div class="span">
-                            <h2>Địa chỉ</h2>
-                            <span>${cinema.getAddress()}</span>
-                        </div>
-                        <div class="span span8">
-                            <h2>Ghế</h2>
-                            <span>${seat.getCode()}</span>
-                        </div>
-                        <div class="span span4">
-                            <h2>Loại ghế</h2>
-                            <span>${seat.getType().toUpperCase()}</span>
-                        </div>
-                        <div class="span span8">
-                            <h2>Dành cho</h2>
-                            <span>${seat.getCapacity()} người</span>
-                        </div>
-                        <div class="span span4">
-                            <h2>Giá vé</h2>
-                            <span class="strong">${ticket.getPriceFormat()}</span>
-                        </div>
-                    </div>
-
-                    <div class="payment bottom">
-                        <h1>Kinh phí hạn hẹp nên chưa có chức năng thanh toán. Vui lòng thanh toán tại quầy</h1>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
     </div>
-    <div class="col-12 m-5 d-flex justify-content-center h1">
+    <div class="col-12 mt-5 d-flex justify-content-center h1">
         <span style="color: chocolate; font-family: math">
-            ENJOY GALAXY xin chân thành cảm ơn!
+            <c:if test="${sessionScope.get('domainDTOList').isEmpty()}">
+                Bạn chưa mua vé nào thì ấn vào đây làm cái tích sự gì?
+            </c:if>
+            <c:if test="${!sessionScope.get('domainDTOList').isEmpty()}">
+                Vui lòng chụp lại 2 mặt vé để tới quầy thanh toán và checkin. ENJOY GALAXY xin chân thành cảm ơn!
+            </c:if>
         </span>
     </div>
-</div>
 </main>
-<%@include file="/WEB-INF/view/common/footer.jsp"%>
+<%@include file="/WEB-INF/view/common/footer.jsp" %>
 </body>
 </html>

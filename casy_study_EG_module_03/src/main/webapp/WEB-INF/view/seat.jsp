@@ -218,7 +218,7 @@
 <script>
     function getInfo() {
         let checkboxElements = document.querySelectorAll(".btn-check");
-        let myHiddenElements = document.querySelectorAll(".myHidden")
+        let hiddenCheckboxElements = document.querySelectorAll(".myHidden")
         let myLabels = document.querySelectorAll(".btn-outline-primary");
         let seatCodes = "";
         let totalPrice = 0;
@@ -227,10 +227,11 @@
             if (checkboxElement.checked && !checkboxElement.hasAttribute('disabled')) {
                 myLabels[i].style.backgroundColor = "#27E621";
                 myLabels[i].style.color = "white";
-                let seatCode = checkboxElements[i].id.substring(18);
-                let price = myHiddenElements[i].value;
-                if (myHiddenElements[i].id === seatCode) {
-                    seatCodes += seatCode += " ";
+                const INDEX_OF_SEAT_CODE = 18;
+                let seatCode = checkboxElements[i].id.substring(INDEX_OF_SEAT_CODE);
+                let price = hiddenCheckboxElements[i].value;
+                if (hiddenCheckboxElements[i].id === seatCode) {
+                    seatCodes = seatCode.concat(seatCode).concat(" ");
                     totalPrice += Number.parseFloat(price);
                 }
             } else if (!checkboxElement.hasAttribute('disabled')) {

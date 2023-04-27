@@ -2,10 +2,11 @@ package model.service;
 
 import model.domain.Ticket;
 import model.domain.seat.Seat;
+import model.dto.DomainDTO;
 
 import java.util.List;
 import java.util.Map;
 
 public interface ITicketService {
-    Map<Seat, Ticket> getSeatAndTicketMap(String[] idSeats, long idUser);
+    List<DomainDTO> getDomainDTOList(String[] idSeats, long idUser, DomainDTO domainDTO);
 }

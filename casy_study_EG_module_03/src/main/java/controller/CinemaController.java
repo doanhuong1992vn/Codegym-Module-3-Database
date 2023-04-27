@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet(name = "CinemaController", urlPatterns = {"/", "/showtime", "/seat", "/booking", ""})
+@WebServlet(name = "CinemaController", urlPatterns = {"/", "/showtime", "/seat", "/booking", "", "/ticket", "/home"})
 public class CinemaController extends HttpServlet {
     private IMovieService movieService;
     private IShowtimeService showtimeService;
@@ -46,14 +46,22 @@ public class CinemaController extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             switch (action) {
-                case "/", "" -> showMovies(request, response);
+                case "/", "", "/home" -> showMovies(request, response);
                 case "/showtime" -> showShowtime(request, response, session);
                 case "/seat" -> showSeats(request, response, session);
                 case "/booking" -> bookTicket(request, response, session);
+                case "/ticket" -> showTicket(request, response, session);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void showTicket(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+        User user = (User) session.getAttribute("user");
+        List<DomainDTO> domainDTOList = cinemaService.getDomainDTOList(user.getId());
+        session.setAttribute("domainDTOList", domainDTOList);
+        request.getRequestDispatcher("/WEB-INF/view/ticket.jsp").forward(request, response);
     }
 
     private void bookTicket(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
@@ -65,8 +73,11 @@ public class CinemaController extends HttpServlet {
         } else {
             session.setAttribute("idSeats", idSeats);
             User user = (User) session.getAttribute("user");
-            Map<Seat, Ticket> seatAndTicketMap = ticketService.getSeatAndTicketMap(idSeats, user.getId());
-            session.setAttribute("seatAndTicketMap", seatAndTicketMap);
+            DomainDTO domainDTO = (DomainDTO) session.getAttribute("domainDTO");
+            Movie movie = (Movie) session.getAttribute("movie");
+            domainDTO.setMovie(movie);
+            List<DomainDTO> domainDTOList = ticketService.getDomainDTOList(idSeats, user.getId(), domainDTO);
+            session.setAttribute("domainDTOList", domainDTOList);
             request.getRequestDispatcher("/WEB-INF/view/ticket.jsp").forward(request, response);
         }
     }

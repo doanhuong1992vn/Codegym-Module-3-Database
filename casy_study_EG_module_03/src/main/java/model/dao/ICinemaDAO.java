@@ -11,4 +11,6 @@ public interface ICinemaDAO {
     List<Cinema> getAll();
 
     DomainDTO getDomainDTO(long idShowtime);
+
+    List<DomainDTO> getDomainDTOList(long idUser);
 }

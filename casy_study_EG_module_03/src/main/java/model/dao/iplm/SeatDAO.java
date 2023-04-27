@@ -15,8 +15,8 @@ import java.util.List;
 
 public class SeatDAO implements ISeatDAO {
     private static final String UPDATE_SEAT = "UPDATE SEAT SET IS_EMPTY = 0 WHERE ID = ?;";
-    private static final String SELECT_SEAT_BY_ID = "SELECT * FROM SEAT WHERE ID = ?";
-    private static final String SELECT_SEATS_BY_ID_SHOWTIME = "SELECT * FROM SEAT WHERE ID_SHOWTIME = ?;";
+    private static final String SELECT_SEAT_BY_ID = "SELECT SEAT.ID AS ID_SEAT, SEAT.TYPE AS TYPE_SEAT, SEAT.CODE AS CODE_SEAT, SEAT.PRICE AS PRICE_SEAT, IS_EMPTY, ID_SHOWTIME FROM SEAT WHERE ID = ?";
+    private static final String SELECT_SEATS_BY_ID_SHOWTIME = "SELECT SEAT.ID AS ID_SEAT, SEAT.TYPE AS TYPE_SEAT, SEAT.CODE AS CODE_SEAT, SEAT.PRICE AS PRICE_SEAT, IS_EMPTY, ID_SHOWTIME FROM SEAT WHERE ID_SHOWTIME = ?;";
     private static final String INSERT_SEAT = "INSERT INTO SEAT(TYPE, CODE, IS_EMPTY, ID_SHOWTIME, PRICE) VALUES (?,?,?,?,?);";
     private static final ISeatDAO seatDAO = new SeatDAO();
 
@@ -54,12 +54,12 @@ public class SeatDAO implements ISeatDAO {
         return seats;
     }
 
-    private static Seat getSeat(ResultSet resultSet) throws SQLException {
-        long id = resultSet.getLong("ID");
-        String type = resultSet.getString("TYPE");
-        String code = resultSet.getString("CODE");
+    public Seat getSeat(ResultSet resultSet) throws SQLException {
+        long id = resultSet.getLong("ID_SEAT");
+        String type = resultSet.getString("TYPE_SEAT");
+        String code = resultSet.getString("CODE_SEAT");
         boolean ready = resultSet.getBoolean("IS_EMPTY");
-        double price = resultSet.getDouble("PRICE");
+        double price = resultSet.getDouble("PRICE_SEAT");
         long idShowtime = resultSet.getLong("ID_SHOWTIME");
         return SeatFactory.getInstance().getSeat(id, type, code, ready, idShowtime, price);
     }

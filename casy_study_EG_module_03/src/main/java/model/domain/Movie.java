@@ -15,6 +15,11 @@ public class Movie {
     private String content;
     private String urlImage;
 
+    public Movie(String name, String urlImage) {
+        this.name = name;
+        this.urlImage = urlImage;
+    }
+
     public Movie(String name,
                  String director,
                  String actors,
