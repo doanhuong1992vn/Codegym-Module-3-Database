@@ -29,7 +29,9 @@ public class DomainDTO implements Cloneable{
         this.ticket = ticket;
         this.movie = movie;
     }
-
+    public long getTimeOfStartTime () {
+        return getShowtime().getTimeOfStartTime();
+    }
     public Movie getMovie() {
         return movie;
     }

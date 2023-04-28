@@ -4,6 +4,8 @@ import model.dao.iplm.CinemaDAO;
 import model.dto.DomainDTO;
 import model.service.ICinemaService;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CinemaServiceImpl implements ICinemaService {
@@ -18,6 +20,8 @@ public class CinemaServiceImpl implements ICinemaService {
 
     @Override
     public List<DomainDTO> getDomainDTOList(long idUser) {
-        return CinemaDAO.getInstance().getDomainDTOList(idUser);
+        List<DomainDTO> domainDTOList = CinemaDAO.getInstance().getDomainDTOList(idUser);
+        domainDTOList.sort(Comparator.comparingLong(DomainDTO::getTimeOfStartTime));
+        return domainDTOList;
     }
 }

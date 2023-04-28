@@ -6,6 +6,7 @@ import model.service.IMovieService;
 import model.utils.Converter;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class MovieServiceImpl implements IMovieService {
@@ -15,7 +16,9 @@ public class MovieServiceImpl implements IMovieService {
 
     @Override
     public List<Movie> getAll() {
-        return MovieDAO.getMovieDAO().getAll();
+        List<Movie> movies = MovieDAO.getMovieDAO().getAll();
+        movies.sort(Comparator.comparingLong(Movie::getTimesOfPremiereDate).reversed());
+        return movies;
     }
 
     @Override

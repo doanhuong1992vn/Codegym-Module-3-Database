@@ -155,4 +155,8 @@ public class Movie {
                 new SimpleDateFormat("dd/MM/yyyy").format(getPremiereDate()),
                 getDuration(), getLanguage(), getContent()).toUpperCase();
     }
+
+    public long getTimesOfPremiereDate() {
+        return getPremiereDate().getTime();
+    }
 }
