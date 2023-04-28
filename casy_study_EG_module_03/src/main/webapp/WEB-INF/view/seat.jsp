@@ -231,7 +231,7 @@
                 let seatCode = checkboxElements[i].id.substring(INDEX_OF_SEAT_CODE);
                 let price = hiddenCheckboxElements[i].value;
                 if (hiddenCheckboxElements[i].id === seatCode) {
-                    seatCodes = seatCode.concat(seatCode).concat(" ");
+                    seatCodes += seatCode += " ";
                     totalPrice += Number.parseFloat(price);
                 }
             } else if (!checkboxElement.hasAttribute('disabled')) {
