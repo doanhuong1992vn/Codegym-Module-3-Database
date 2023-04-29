@@ -18,13 +18,9 @@ public class ShowtimeDAO implements IShowtimeDAO {
             "FROM SHOWTIME WHERE ID_ROOM = ?";
     private static final String INSERT_SHOWTIME = "INSERT INTO SHOWTIME(START_TIME, END_TIME, ID_ROOM, ID_MOVIE) VALUES (?,?,?,?);";
     private static final String SELECT_MAP = "CALL GET_MAP_SHOWTIME(?)";
-    private static final IShowtimeDAO showtimeDAO = new ShowtimeDAO();
-
-    private ShowtimeDAO() {
-    }
 
     public static IShowtimeDAO getShowtimeDAO() {
-        return showtimeDAO;
+        return new ShowtimeDAO();
     }
     @Override
     public long insertShowtime(Showtime showtime) {

@@ -2,13 +2,11 @@ package controller;
 
 import model.domain.Movie;
 import model.domain.Showtime;
-import model.domain.Ticket;
 import model.domain.seat.Seat;
 import model.domain.users.User;
 import model.dto.DomainDTO;
 import model.service.*;
 import model.service.impl.*;
-import model.utils.Converter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -84,7 +81,7 @@ public class CinemaController extends HttpServlet {
 
     private void showSeats(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
         long idShowtime = Long.parseLong(request.getParameter("idShowtime"));
-        Seat[][] seats = seatService.getSeatsByIdShowtime(idShowtime);
+        Seat[][] seats = seatService.getSeatArrayByIdShowtime(idShowtime);
         session.setAttribute("seats", seats);
         DomainDTO domainDTO = cinemaService.getDomainDTO(idShowtime);
         session.setAttribute("domainDTO", domainDTO);
