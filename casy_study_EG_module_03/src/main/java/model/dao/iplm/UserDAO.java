@@ -99,4 +99,5 @@ public class UserDAO implements IUserDAO {
                 .salary(salary)
                 .build();
     }
+
 }
