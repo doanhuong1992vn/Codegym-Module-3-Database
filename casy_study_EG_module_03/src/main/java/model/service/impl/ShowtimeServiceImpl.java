@@ -56,16 +56,14 @@ public class ShowtimeServiceImpl implements IShowtimeService {
     }
 
     private static void addShowtime(Date startTime, Date endTime, Room room, Movie randomMovie) {
-        if (endTime.after(new Date())) {
-            IShowtimeBuilder showtimeBuilder = new ShowtimeConcreteBuilder()
-                    .idMovie(randomMovie.getId())
-                    .idRoom(room.getId())
-                    .startTime(startTime)
-                    .endTime(endTime);
-            Showtime showtime = showtimeBuilder.build("demo");
-            long idShowtime = ShowtimeDAO.getShowtimeDAO().insertShowtime(showtime);
-            SeatServiceImpl.getSeatsAndInsert(idShowtime, room);
-        }
+        IShowtimeBuilder showtimeBuilder = new ShowtimeConcreteBuilder()
+                .idMovie(randomMovie.getId())
+                .idRoom(room.getId())
+                .startTime(startTime)
+                .endTime(endTime);
+        Showtime showtime = showtimeBuilder.build("demo");
+        long idShowtime = ShowtimeDAO.getShowtimeDAO().insertShowtime(showtime);
+        SeatServiceImpl.getSeatsAndInsert(idShowtime, room);
     }
 
     public static IShowtimeService getShowtimeService() {
