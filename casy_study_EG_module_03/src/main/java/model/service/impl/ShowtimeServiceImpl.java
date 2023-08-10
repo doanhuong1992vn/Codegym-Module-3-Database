@@ -11,37 +11,48 @@ import model.service.IShowtimeService;
 import model.utils.Converter;
 import model.utils.Validation;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 public class ShowtimeServiceImpl implements IShowtimeService {
     static {
+        System.out.println("BEGIN MOCKUP DATA");
         Date startTimeOfLastShowtime = new Date();
         Date sevenDaysLater = Converter.convertTo7DaysLater(new Date());
+        Date beginOfToday = Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         while (startTimeOfLastShowtime.before(sevenDaysLater)) {
             try {
-                startTimeOfLastShowtime = autoAddShowtimeAndReturnLastShowtime(startTimeOfLastShowtime);
+                startTimeOfLastShowtime = autoAddShowtimeAndReturnLastShowtime(startTimeOfLastShowtime, beginOfToday);
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
         }
     }
 
-    private static Date autoAddShowtimeAndReturnLastShowtime(Date startTimeOfLastShowtime) throws ParseException {
+    private static Date autoAddShowtimeAndReturnLastShowtime(Date startTimeOfLastShowtime, Date beginTime) throws ParseException {
         for (Room room : RoomDAO.getRoomDAO().getAll()) {
-            Date newStartTime;
+            System.out.println("MOCKUP DATA AT " + startTimeOfLastShowtime + " IN ROOM " + room.getName());
+            Date newStartTime = new Date();;
             Movie randomMovie = MovieServiceImpl.getMovieService().getRandomMovie();
             List<Showtime> showtimeList = ShowtimeDAO.getShowtimeDAO().getShowtimeList(room.getId(), "idRoom");
             showtimeList.sort(Comparator.comparingLong(Showtime::getTimeOfStartTime));
             if (!showtimeList.isEmpty()) {
                 Showtime lastShowtime = showtimeList.get(showtimeList.size() - 1);
                 Date endTimeOfLastShowtime = lastShowtime.getEndTime();
-                startTimeOfLastShowtime = lastShowtime.getStartTime();
+                if (lastShowtime.getStartTime().after(beginTime)) {
+                    startTimeOfLastShowtime = lastShowtime.getStartTime();
+                }
                 Date sevenDaysLater = Converter.convertTo7DaysLater(new Date());
                 if (startTimeOfLastShowtime.after(sevenDaysLater)) {
                     continue;
                 }
-                newStartTime = Converter.getDateAfterCleaningTime(endTimeOfLastShowtime);
+                if (endTimeOfLastShowtime.after(beginTime)) {
+                    newStartTime = Converter.getDateAfterCleaningTime(endTimeOfLastShowtime);
+                }
             } else {
                 newStartTime = new Date();
             }
